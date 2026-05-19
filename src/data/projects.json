@@ -1,0 +1,122 @@
+[
+  {
+    "id": "01",
+    "title": "Horizon Analytics",
+    "description": "Real-time business intelligence platform with role-based access, live WebSocket dashboards, and exportable PDF reports.",
+    "stack": ["Next.js", "Node.js", "MongoDB", "Tailwind", "WebSocket"],
+    "category": ["next", "react"],
+    "liveUrl": "https://horizon-analytics.vercel.app",
+    "repoUrl": "https://github.com/yourname/horizon-analytics",
+    "status": "live",
+    "featured": true,
+    "year": "2024"
+  },
+  {
+    "id": "02",
+    "title": "Forge API",
+    "description": "Production-grade REST API with JWT authentication, Stripe billing integration, rate limiting, and full test coverage.",
+    "stack": ["Node.js", "Express", "MongoDB", "Jest", "Stripe"],
+    "category": ["js"],
+    "liveUrl": null,
+    "repoUrl": "https://github.com/yourname/forge-api",
+    "status": "live",
+    "featured": true,
+    "year": "2024"
+  },
+  {
+    "id": "03",
+    "title": "Canvas CMS",
+    "description": "Headless content management system with a visual block editor, media library, and multi-environment publishing workflow.",
+    "stack": ["Next.js", "React", "PostgreSQL", "Tailwind"],
+    "category": ["next", "react"],
+    "liveUrl": "https://canvas-cms.vercel.app",
+    "repoUrl": "https://github.com/yourname/canvas-cms",
+    "status": "live",
+    "featured": false,
+    "year": "2024"
+  },
+  {
+    "id": "04",
+    "title": "Pulse UI",
+    "description": "Design system and component library with 40+ accessible components, dark mode support, and Storybook documentation.",
+    "stack": ["React", "TypeScript", "CSS Modules", "Storybook"],
+    "category": ["react", "css"],
+    "liveUrl": "https://pulse-ui.vercel.app",
+    "repoUrl": "https://github.com/yourname/pulse-ui",
+    "status": "live",
+    "featured": false,
+    "year": "2023"
+  },
+  {
+    "id": "05",
+    "title": "Meridian",
+    "description": "Location-aware task management app with team workspaces, deadline tracking, and Slack integration.",
+    "stack": ["Next.js", "Node.js", "Redis", "PostgreSQL"],
+    "category": ["next", "js"],
+    "liveUrl": null,
+    "repoUrl": "https://github.com/yourname/meridian",
+    "status": "in-progress",
+    "featured": false,
+    "year": "2025"
+  },
+  {
+    "id": "06",
+    "title": "Static Blueprint",
+    "description": "High-performance marketing site built with zero JavaScript runtime. Perfect Lighthouse score across all metrics.",
+    "stack": ["HTML", "CSS", "Eleventy"],
+    "category": ["css", "html"],
+    "liveUrl": "https://static-blueprint.com",
+    "repoUrl": "https://github.com/yourname/static-blueprint",
+    "status": "live",
+    "featured": false,
+    "year": "2023"
+  },
+  {
+    "id": "07",
+    "title": "Orbit Store",
+    "description": "Full-stack e-commerce platform with inventory management, order tracking, and a custom checkout flow.",
+    "stack": ["Next.js", "Node.js", "MongoDB", "Stripe"],
+    "category": ["next", "react", "js"],
+    "liveUrl": "https://orbit-store.vercel.app",
+    "repoUrl": "https://github.com/yourname/orbit-store",
+    "status": "live",
+    "featured": false,
+    "year": "2023"
+  },
+  {
+    "id": "08",
+    "title": "Chronicle",
+    "description": "Developer blog platform with MDX support, syntax highlighting, reading time estimation, and RSS feed generation.",
+    "stack": ["Next.js", "MDX", "Tailwind", "Shiki"],
+    "category": ["next", "react"],
+    "liveUrl": "https://chronicle.vercel.app",
+    "repoUrl": "https://github.com/yourname/chronicle",
+    "status": "live",
+    "featured": false,
+    "year": "2023"
+  },
+  {
+    "id": "09",
+    "title": "Terminal Portfolio v1",
+    "description": "First-generation portfolio with an interactive terminal interface. The predecessor to what you are reading now.",
+    "stack": ["HTML", "CSS", "JavaScript"],
+    "category": ["html", "css", "js"],
+    "liveUrl": null,
+    "repoUrl": "https://github.com/yourname/terminal-portfolio",
+    "status": "archived",
+    "featured": false,
+    "year": "2022"
+  },
+  {
+    "id": "10",
+    "title": "Beacon",
+    "description": "Real-time notification service with multi-channel delivery (email, SMS, push), preference management, and delivery analytics.",
+    "stack": ["Node.js", "Redis", "WebSocket", "Twilio"],
+    "category": ["js"],
+    "liveUrl": null,
+    "repoUrl": "https://github.com/yourname/beacon",
+    "status": "in-progress",
+    "featured": false,
+    "year": "2025"
+  }
+]

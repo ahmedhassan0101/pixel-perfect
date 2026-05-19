@@ -1,0 +1,3 @@
+# نفّذ هذا
+npm uninstall shadcn radix-ui next-themes next-intl class-variance-authority tailwindcss-animate tw-animate-css
+npm install framer-motion

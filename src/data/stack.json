@@ -1,0 +1,53 @@
+[
+  {
+    "category": "Frontend",
+    "index": "01",
+    "tools": [
+      { "name": "Next.js",    "level": 95, "note": "App Router, RSC, SSG"     },
+      { "name": "React",      "level": 92, "note": "Hooks, Context, Patterns" },
+      { "name": "TypeScript", "level": 88, "note": "Strict mode always"       },
+      { "name": "Tailwind",   "level": 90, "note": "v4, CSS-first config"     },
+      { "name": "Framer",     "level": 75, "note": "Purposeful animation"     }
+    ]
+  },
+  {
+    "category": "Backend",
+    "index": "02",
+    "tools": [
+      { "name": "Node.js",  "level": 90, "note": "Event loop, streams"    },
+      { "name": "Express",  "level": 85, "note": "REST, middleware"        },
+      { "name": "REST API", "level": 88, "note": "Design & documentation" },
+      { "name": "Auth",     "level": 80, "note": "JWT, sessions, OAuth"   }
+    ]
+  },
+  {
+    "category": "Database",
+    "index": "03",
+    "tools": [
+      { "name": "MongoDB",   "level": 87, "note": "Atlas, aggregation"  },
+      { "name": "Mongoose",  "level": 85, "note": "Schema design"       },
+      { "name": "Redis",     "level": 70, "note": "Caching, pub/sub"    },
+      { "name": "Postgres",  "level": 65, "note": "Relational modeling" }
+    ]
+  },
+  {
+    "category": "Infrastructure",
+    "index": "04",
+    "tools": [
+      { "name": "Vercel",  "level": 90, "note": "Deploy, edge functions" },
+      { "name": "Git",     "level": 92, "note": "Branching, CI workflow" },
+      { "name": "Docker",  "level": 68, "note": "Containerization"       },
+      { "name": "Linux",   "level": 72, "note": "CLI, server management" }
+    ]
+  },
+  {
+    "category": "Tooling",
+    "index": "05",
+    "tools": [
+      { "name": "ESLint",    "level": 85, "note": "Strict config"    },
+      { "name": "Zod",       "level": 82, "note": "Runtime validation"},
+      { "name": "Shiki",     "level": 78, "note": "Syntax highlight" },
+      { "name": "Storybook", "level": 70, "note": "Component docs"   }
+    ]
+  }
+]

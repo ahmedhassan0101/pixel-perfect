@@ -1,0 +1,87 @@
+{
+  "Navbar": {
+    "work": "الأعمال",
+    "expertise": "الخبرات",
+    "about": "عني",
+    "contact": "التواصل",
+    "toggleTheme": "تبديل السمة",
+    "switchLocale": "English",
+    "openMenu": "فتح قائمة التنقل",
+    "closeMenu": "إغلاق قائمة التنقل"
+  },
+  "Hero": {
+    "available": "متاح لمشاريع جديدة",
+    "role": "مهندس متكامل",
+    "headline_1": "بناء أنظمة متينة.",
+    "headline_2": "وصياغة واجهات مثالية.",
+    "subheadline": "أبني منتجات متكاملة باستخدام Node.js وNext.js وReact — من مخطط قاعدة البيانات حتى الواجهة المنشورة.",
+    "cta_primary": "استعرض الأعمال",
+    "cta_secondary": "لنتحدث",
+    "scroll": "تمرير",
+    "stack_label": "المنظومة الحالية",
+    "coordinates": "33.8869° N, 9.5375° E",
+    "version": "الإصدار 2.0 — 2025",
+    "status_open": "متاح للفرص",
+    "years_exp": "+3",
+    "years_label": "سنوات بناء أنظمة إنتاجية",
+    "projects_count": "+24",
+    "projects_label": "مشروع منشور",
+    "terminal_role": "full-stack-engineer",
+    "terminal_location": "عن بُعد / حول العالم",
+    "terminal_status": "متاح"
+  },
+  "Work": {
+    "sectionLabel": "أعمال مختارة",
+    "live": "عرض المشروع",
+    "repo": "المستودع",
+    "status": {
+      "live": "منشور",
+      "inProgress": "قيد التطوير",
+      "archived": "مؤرشف"
+    }
+  },
+  "Stack": {
+    "sectionLabel": "المنظومة التقنية",
+    "categories": {
+      "frontend": "الواجهة الأمامية",
+      "backend": "الخادم",
+      "database": "قاعدة البيانات",
+      "infra": "البنية التحتية",
+      "tooling": "الأدوات"
+    }
+  },
+  "Algorithms": {
+    "sectionLabel": "حل المسائل",
+    "description": "ممارسة منتظمة عبر منصات البرمجة التنافسية.",
+    "viewSolution": "عرض الحل",
+    "problems": "{count} مسألة محلولة"
+  },
+  "Resume": {
+    "sectionLabel": "السيرة الذاتية",
+    "download": "تحميل PDF",
+    "experience": "الخبرة",
+    "education": "التعليم",
+    "skills": "المهارات",
+    "present": "الحاضر"
+  },
+  "Contact": {
+    "sectionLabel": "التواصل",
+    "headline": "لنعمل معاً.",
+    "body": "متاح للوظائف الكاملة والمشاريع المستقلة. رد خلال 24 ساعة.",
+    "name": "اسمك",
+    "email": "البريد الإلكتروني",
+    "message": "رسالتك",
+    "send": "إرسال الرسالة"
+  },
+  "Footer": {
+    "rights": "جميع الحقوق محفوظة"
+  },
+  "Errors": {
+    "notFound": "هذه الصفحة غير موجودة.",
+    "server": "حدث خطأ ما. أعد التحميل وحاول مجدداً."
+  },
+  "Meta": {
+    "defaultTitle": "مهندس متكامل — بورتفوليو",
+    "description": "مهندس متكامل متخصص في Next.js وNode.js وأنظمة الويب القابلة للتوسع."
+  }
+}

@@ -1,65 +1,131 @@
-import Image from "next/image";
+// src/app/page.tsx
+// ─────────────────────────────────────────────────────────────
+// The complete portfolio page.
+// Assembly order matches the narrative arc:
+//
+//   Atmosphere  → GrainOverlay (always on, z-9999)
+//   Navigation  → Navbar (ghost → solid on scroll)
+//   ──────────────────────────────────────────────
+//   §01 Hero    → The Prologue     (who I am)
+//   §02 Manifesto → The Identity   (how I think)
+//   §03 Work    → The Artifacts    (what I built)
+//   §04 Stack   → The Architecture (how I build)
+//   §05 Contact → The Sign-off     (let's talk)
+//   ──────────────────────────────────────────────
+//   Footer      → Punctuation
+//
+// Every section is a Server Component.
+// Client JS lives only where browser APIs are required.
+// ─────────────────────────────────────────────────────────────
 
-export default function Home() {
+import { GrainOverlay }       from "@/components/ui/GrainOverlay";
+import { Navbar }             from "@/components/layout/Navbar";
+import { HeroSection }        from "@/components/sections/HeroSection";
+import { ManifestoSection }   from "@/components/sections/ManifestoSection";
+import { WorkSection }        from "@/components/sections/WorkSection";
+
+// Stack: choose ONE and rename it StackSection
+import { StackTableVariation as StackSection }
+  from "@/components/sections/StackSection";
+// import { StackGridVariation as StackSection }
+//   from "@/components/sections/StackSection";
+
+import { ContactSection, SiteFooter }
+  from "@/components/sections/ContactSection";
+
+import type { Metadata } from "next";
+import { HeroSectionTwo } from "@/components/sections/HeroSectionTwo";
+
+// ── Page metadata ─────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  title: "Full-Stack Engineer — Portfolio",
+  description:
+    "I engineer systems with structural rigor, and design interfaces with cinematic warmth. Node.js · Next.js · React.",
+  openGraph: {
+    title:       "Full-Stack Engineer — Portfolio",
+    description: "Systems built to last. Interfaces built to feel.",
+    type:        "website",
+  },
+};
+
+// ── Page ──────────────────────────────────────────────────────
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      {/* ── Atmosphere — fixed, GPU, always on ──────────── */}
+      <GrainOverlay />
+
+      {/* ── Navigation ──────────────────────────────────── */}
+      <Navbar />
+
+      {/* ── Main content ─────────────────────────────────── */}
+      <main id="main-content">
+
+        {/* § 01 — The Prologue */}
+        <HeroSection />
+        <HeroSectionTwo />
+
+        {/* § 02 — The Identity */}
+        <ManifestoSection />
+
+        {/* § 03 — The Artifacts */}
+        <WorkSection />
+
+        {/* § 04 — The Architecture */}
+        <StackSection />
+
+        {/* § 05 — The Sign-off */}
+        <ContactSection />
+
       </main>
-    </div>
+
+      {/* ── Punctuation ──────────────────────────────────── */}
+      <SiteFooter />
+    </>
   );
 }
+
+// //
+// // Note: GrainOverlay and Navbar are rendered here at the page level
+// // so they sit outside the section and cover the full viewport.
+// // In production, move Navbar to layout.tsx if it persists across routes.
+
+// import { GrainOverlay } from "@/components/ui/GrainOverlay";
+// import { Navbar } from "@/components/layout/Navbar";
+// import { HeroSection } from "@/components/sections/HeroSection";
+// import { ManifestoSection } from "@/components/sections/ManifestoSection";
+// import { WorkSection } from "@/components/sections/work/WorkSection";
+// import { StackGridVariation, StackTableVariation } from "@/components/sections/stack/StackSection";
+// import { ContactSection } from "@/components/sections/ContactSection";
+
+// export default function HomePage() {
+//   return (
+//     <>
+//       {/* ── Atmosphere ──────────────────────────────────────── */}
+//       {/* GrainOverlay is fixed, z-[9999], pointer-events-none  */}
+//       {/* It renders once on the GPU — zero scroll cost         */}
+//       <GrainOverlay />
+
+//       {/* ── Navigation ──────────────────────────────────────── */}
+//       {/* Ghost on load. Materializes at 80px scroll.           */}
+//       <Navbar />
+
+//       {/* ── Prologue ─────────────────────────────────────────── */}
+//       {/*                                                        */}
+//       {/* Pass portraitSrc when you have the photo:             */}
+//       <HeroSection portraitSrc="https://asset.imagine.art/processed/e683e3e2-00c7-4082-a76f-6e9d98b711f4" />
+//       {/*                                                        */}
+//       {/* The architectural placeholder shows until then.       */}
+//       {/* <HeroSection /> */}
+
+//       {/* ── Coming sections — uncomment as built ─────────────── */}
+//       <ManifestoSection />  
+//       <WorkSection />       
+//       <StackGridVariation />      
+//       <StackTableVariation />   
+//       <ContactSection />    
+//     </>
+//   );
+// }

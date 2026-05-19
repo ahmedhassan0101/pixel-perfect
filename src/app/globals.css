@@ -1,26 +1,508 @@
+/* ============================================================
+   globals.css
+   Portfolio — Cinematic Dark Identity
+   Philosophy: Human Behind the Code
+
+   Architecture:
+   1. @import          → Tailwind v4 only. Nothing else.
+   2. @theme inline    → Every token → Tailwind utility class
+   3. :root            → Raw design tokens (single source of truth)
+   4. @layer base      → Reset + font defaults + grain texture
+   5. @layer utilities → Type scale + interaction primitives
+   ============================================================ */
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   SECTION 1 — @theme
+   Translates every CSS variable into a Tailwind utility class.
+   bg-background, text-foreground, border-border-default, etc.
+   No shadcn. No config file. This IS the config.
+   ============================================================ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  /* ── Fonts ─────────────────────────────────────────────── */
+  /* Injected as CSS vars on <html> by next/font in layout.tsx */
+  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-geist);
   --font-mono: var(--font-geist-mono);
+
+  /* ── Colors — raw palette → utility classes ────────────── */
+
+  /* Backgrounds */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+
+  /* Borders */
+  --color-border: var(--border-default);
+  --color-border-em: var(--border-emphasis);
+
+  /* Text */
+  --color-text: var(--text-primary);
+  --color-muted: var(--text-secondary);
+  --color-ghost: var(--text-tertiary);
+
+  /* Accent */
+  --color-gold: var(--accent-gold);
+  --color-gold-hover: var(--accent-hover);
+
+  /* Code */
+  --color-code-bg: var(--code-surface);
+  --color-code-text: var(--code-text);
+
+  /* ── Radius ─────────────────────────────────────────────── */
+  --radius-none: 0px;
+  --radius-default: 2px;
+  --radius-card: 4px;
+  --radius-pill: 9999px;
+
+  /* ── Spacing extras ─────────────────────────────────────── */
+  --spacing-section: 8rem;
+  --spacing-section-sm: 5rem;
+  --spacing-gutter: 1.25rem;
+  --spacing-gutter-lg: 3rem;
+  --width-content: 1100px;
+  --width-prose: 58ch;
+
+  /* ── Transitions ─────────────────────────────────────────── */
+  /* Two easing curves — entrance and exit. Nothing else.      */
+  --ease-in: cubic-bezier(0.25, 0, 0, 1);
+  --ease-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --duration-fast: 150ms;
+  --duration-default: 250ms;
+  --duration-slow: 350ms;
+
+  /* ── Shadow — one only ──────────────────────────────────── */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================================
+   SECTION 2 — DESIGN TOKENS
+   Single source of truth for every value.
+   @theme reads from here. Components read from here.
+   Hex values appear in exactly one place: this block.
+   ============================================================ */
+
+:root {
+  /* ── Backgrounds ────────────────────────────────────────── */
+  --bg: #0f0e0c; /* near-black, warm — like exposed film    */
+  --surface: #1a1916; /* lifted surface — cards, panels          */
+  --elevated: #242220; /* highest surface — modals, code blocks   */
+
+  /* ── Borders ────────────────────────────────────────────── */
+  --border-default: #2c2926; /* barely visible — structural only */
+  --border-emphasis: #3d3830; /* hover states, active elements    */
+
+  /* ── Text ───────────────────────────────────────────────── */
+  --text-primary: #f0ece4; /* warm off-white — contrast 15.3:1  */
+  --text-secondary: #8a8278; /* raised from spec — contrast 4.6:1 */
+  --text-tertiary: #4a4540; /* decorative only — placeholders    */
+
+  /* ── Accent ─────────────────────────────────────────────── */
+  --accent-gold: #c8a060; /* the only warm color — use sparingly */
+  --accent-hover: #d4ae72; /* slightly brighter on interaction    */
+
+  /* ── Code ───────────────────────────────────────────────── */
+  --code-surface: #141310; /* deepest black — code blocks only   */
+  --code-text: #e8e0d0; /* warmer than body text              */
+
+  /* ── Radius ─────────────────────────────────────────────── */
+  --radius: 2px; /* Tailwind [data-*] fallback         */
+}
+
+/* ============================================================
+   SECTION 3 — BASE LAYER
+   Reset, font application, grain texture, global defaults.
+   Everything here is structural — never visual opinion.
+   ============================================================ */
+
+@layer base {
+  /* ── Box model reset ────────────────────────────────────── */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Border color defaults to our token — never browser default */
+    border-color: var(--border-default);
+  }
+
+  /* ── Document root ──────────────────────────────────────── */
+  html {
+    background-color: var(--bg);
+    color: var(--text-primary);
+
+    /* Fraunces for display — Geist as fallback for UI        */
+    font-family: var(--font-geist), system-ui, sans-serif;
+
+    /* Film-grade rendering — no LCD smoothing artifacts      */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Optical kerning and ligatures                          */
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1,
+      "calt" 1;
+    text-rendering: optimizeLegibility;
+
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+
+    /* Contain grain pseudo-element                           */
+    position: relative;
+  }
+
+  /* ── Grain texture ──────────────────────────────────────── */
+  /* Fixed position = renders once on GPU, never repaints    */
+  /* on scroll. Gemini's concern addressed: position:fixed   */
+  /* + will-change:transform = zero scroll performance cost. */
+  html::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.035;
+    will-change: transform; /* composited on GPU layer — no repaint */
+
+    /* SVG fractal noise — the difference between a           */
+    /* photograph and a screen render.                       */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23grain)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 300px 300px;
+  }
+
+  /* ── Body ───────────────────────────────────────────────── */
+  body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-geist), system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    min-height: 100dvh;
+  }
+
+  /* ── Global element resets ──────────────────────────────── */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Images: no radius — photographs bleed to their edges    */
+  img {
+    border-radius: 0;
+  }
+
+  hr {
+    border: none;
+    border-block-start: 1px solid var(--border-default);
+  }
+
+  /* ── Focus visible ──────────────────────────────────────── */
+  /* Gold ring — consistent, on-brand, accessible            */
+  :focus-visible {
+    outline: 1.5px solid var(--accent-gold);
+    outline-offset: 3px;
+    border-radius: var(--radius);
+  }
+
+  /* ── Text selection ─────────────────────────────────────── */
+  ::selection {
+    background-color: var(--accent-gold);
+    color: var(--bg);
+  }
+
+  /* ── Scrollbar ──────────────────────────────────────────── */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-default);
+    border-radius: 1px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--border-emphasis);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   SECTION 4 — TYPOGRAPHY UTILITIES
+   All fluid — clamp() for every display size.
+   Fraunces for story. Geist for data. Mono for labels.
+   ============================================================ */
+
+@layer utilities {
+  /* ── Display — the human voice ──────────────────────────── */
+  /* Fraunces variable: weight 300, italic for emphasis       */
+  .text-display {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 300;
+    line-height: 0.94;
+    letter-spacing: -0.01em;
+    font-variation-settings:
+      "SOFT" 50,
+      "WONK" 1;
+  }
+
+  /* ── Heading — section openers ──────────────────────────── */
+  .text-heading {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    font-variation-settings:
+      "SOFT" 50,
+      "WONK" 1;
+  }
+
+  /* ── Subheading — Geist, light ──────────────────────────── */
+  .text-subheading {
+    font-family: var(--font-geist), system-ui, sans-serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 300;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Body — the precise voice ───────────────────────────── */
+  .text-body {
+    font-family: var(--font-geist), system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  /* ── Caption — Geist Mono, always uppercase ─────────────── */
+  .text-caption {
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+  }
+
+  /* ── Label — smallest mono label ───────────────────────── */
+  .text-label {
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 0.6875rem;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+  }
+
+  /* ── Mono — inline code and data ───────────────────────── */
+  .text-mono {
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  /* ── Italic emphasis for Fraunces ───────────────────────── */
+  /* Used inside headlines for the cinematic warmth           */
+  .text-em {
+    font-style: italic;
+    color: var(--accent-gold);
+  }
+
+  /* ============================================================
+     SECTION 5 — INTERACTION PRIMITIVES
+     Two transition classes. Two easing curves. That is all.
+     ============================================================ */
+
+  /* Standard transition — hover states, color changes        */
+  .transition-base {
+    transition-property:
+      color, background-color, border-color, opacity, text-decoration-color;
+    transition-duration: var(--duration-default);
+    transition-timing-function: var(--ease-in);
+  }
+
+  /* Entrance transition — elements appearing                 */
+  .transition-enter {
+    transition-property: opacity, transform, filter;
+    transition-duration: var(--duration-slow);
+    transition-timing-function: var(--ease-in);
+  }
+
+  /* ── Gold underline — the primary link signal ───────────── */
+  .underline-gold {
+    text-decoration: underline;
+    text-decoration-color: var(--accent-gold);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+
+  .hover\:underline-gold:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent-gold);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+
+  /* ── Image treatment — desaturate at rest ───────────────── */
+  /* Full saturation on hover — the image "comes alive"       */
+  .img-cinematic {
+    filter: grayscale(20%) contrast(1.05);
+    transition: filter var(--duration-slow) var(--ease-in);
+  }
+
+  .img-cinematic:hover {
+    filter: grayscale(0%) contrast(1);
+  }
+
+  /* ============================================================
+     SECTION 6 — GRAIN & PULSE ANIMATIONS
+     CSS keyframes only. No library.
+     ============================================================ */
+
+  /* ── Availability pulse ──────────────────────────────────── */
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    75%,
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+
+  .pulse-ring {
+    animation: pulse-ring 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  /* ── Terminal cursor blink ───────────────────────────────── */
+  @keyframes cursor-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .cursor-blink {
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  /* ── Fade in on page enter ───────────────────────────────── */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  .page-enter {
+    animation: fade-in 400ms var(--ease-in) forwards;
+  }
+
+  /* ── Ticker scroll — stack section ──────────────────────── */
+  @keyframes ticker-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .ticker {
+    animation: ticker-left 28s linear infinite;
+    width: max-content;
+  }
+
+  .ticker:hover {
+    animation-play-state: paused;
+  }
+
+  /* ── Subtle float — for decorative elements only ─────────── */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  /* ============================================================
+     SECTION 7 — LAYOUT UTILITIES
+     Max-width containers and section spacing.
+     ============================================================ */
+
+  .container-content {
+    max-width: var(--width-content);
+    margin-inline: auto;
+    padding-inline: var(--spacing-gutter);
+  }
+
+  @media (min-width: 768px) {
+    .container-content {
+      padding-inline: var(--spacing-gutter-lg);
+    }
+  }
+
+  .container-prose {
+    max-width: var(--width-prose);
+    margin-inline: auto;
+  }
+
+  .section-padding {
+    padding-block: var(--spacing-section);
+  }
+
+  .section-padding-sm {
+    padding-block: var(--spacing-section-sm);
+  }
+
+  /* ── Accessibility ───────────────────────────────────────── */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
 }
