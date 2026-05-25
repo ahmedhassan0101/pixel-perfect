@@ -42,8 +42,8 @@ interface NavbarProps {
 
 const DEFAULT_LINKS: NavLink[] = [
   { href: "#work", label: "Work" },
+  { href: "#algorithms", label: "Algorithms" }, // هنا هيتغير ويبقى لقسم ال § 02 — The Manifesto
   { href: "#stack", label: "Stack" },
-  { href: "#algorithms", label: "Algorithms" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -59,6 +59,7 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
   // ── Scroll detection ───────────────────────────────────────
   useEffect(() => {
     function onScroll() {
+      // Update state only if it passes the threshold
       setScrolled(window.scrollY > SCROLL_THRESHOLD);
     }
     // Run once on mount in case page loads scrolled
@@ -80,6 +81,8 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
     };
   }, [menuOpen]);
 
+  // Handle mobile link click to close menu
+  const handleMobileLinkClick = () => setMenuOpen(false);
   return (
     <>
       {/* ── Main header bar ─────────────────────────────────── */}
@@ -153,7 +156,7 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
             <div className="hidden md:flex items-center gap-4">
               {/* Coordinate label — editorial detail */}
               <span className="text-label text-ghost hidden lg:block">
-                33.8869° N
+                30.0444° N
               </span>
               <span
                 className="w-px h-3 bg-border hidden lg:block"
@@ -209,10 +212,10 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
           )}
         >
           <span className="text-label text-ghost" style={{ fontSize: "9px" }}>
-            33.8869° N, 9.5375° E
+            30.0444° N, 31.2357° E
           </span>
           <span className="text-label text-ghost" style={{ fontSize: "9px" }}>
-            v2.0 · {new Date().getFullYear()}
+            v3.0 · {new Date().getFullYear()}
           </span>
         </div>
       </header>
@@ -236,10 +239,11 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
 
           {/* Links */}
           <nav className="flex flex-col flex-1 container-content py-8">
-            {links.map(({ href, label }, i) => (
+            {links.map(({ href, label }) => (
               <NextLink
                 key={href}
                 href={href}
+                onClick={handleMobileLinkClick}
                 className="
                   flex items-center justify-between
                   py-5 border-b border-border
@@ -249,7 +253,6 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
                 "
               >
                 <span>{label}</span>
-                <span className="text-label text-ghost">0{i + 1}</span>
               </NextLink>
             ))}
           </nav>
@@ -257,7 +260,7 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
           {/* Mobile footer */}
           <div className="container-content py-6 border-t border-border">
             <p className="text-label text-ghost">
-              33.8869° N, 9.5375° E · v2.0
+              30.0444° N, 31.2357° E · v3.0
             </p>
           </div>
         </div>

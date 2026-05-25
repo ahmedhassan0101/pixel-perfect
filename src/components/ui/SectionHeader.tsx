@@ -1,95 +1,204 @@
-/**
- * SectionHeader.tsx
- *
- * Philosophical Reasoning:
- * Every section of the portfolio is a chapter. The SectionHeader is the
- * chapter heading — it establishes context before the content speaks.
- * The pattern is always the same: a small gold mono label (the index,
- * the category), then the large Fraunces headline (the human voice),
- * then an optional Geist body (the precise explanation), then a 32px
- * gold line (the accent mark — used sparingly, never decoratively).
- *
- * The consistency of this pattern across sections creates rhythm.
- * Rhythm creates trust. Trust creates the feeling that a deliberate
- * human — not a template — assembled this.
- *
- * The "em" italic in Fraunces is the warmth injection. A single word
- * in italic gold inside a weight-300 headline creates cinematic tension
- * without breaking the structural identity.
- */
+"use client";
 
-import { cn } from "@/lib/utils";
+import React from "react";
+import { motion } from "framer-motion";
 
 interface SectionHeaderProps {
-  /** Small mono label above headline — e.g. "§ 01 — SELECTED WORK" */
+  index: string;
   label: string;
-  /** Optional section index prefix — e.g. "01" */
-  index?: string;
-  /** Large Fraunces headline */
-  headline: React.ReactNode;
-  /** Optional body copy in Geist light */
-  body?: string;
-  /** Show the 32px gold accent line below */
-  accentLine?: boolean;
-  /** Alignment — default is start (left in LTR) */
-  align?: "start" | "center";
-  className?: string;
+  titleLine1: string;
+  titleLine2: string;
+  description: React.ReactNode;
 }
-
 export function SectionHeader({
-  label,
   index,
-  headline,
-  body,
-  accentLine = true,
-  align = "start",
-  className,
+  label,
+  titleLine1,
+  titleLine2,
+  description,
 }: SectionHeaderProps) {
-  const centered = align === "center";
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1] as const,
+      },
+    },
+  };
 
   return (
-    <header
-      className={cn(
-        "flex flex-col",
-        centered ? "items-center text-center" : "items-start",
-        className,
-      )}
+    <motion.header
+      className="mb-16"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
     >
-      {/* ── Small gold label ──────────────────────────────── */}
-      <p className="text-label text-gold flex items-center gap-2 mb-6">
+      {/* Label Section */}
+      <motion.p
+        variants={itemVariants}
+        className="text-label text-gold! flex items-center gap-2 mb-6"
+      >
         <span aria-hidden="true">§</span>
-        {index && (
-          <>
-            <span>{index}</span>
-            <span aria-hidden="true">—</span>
-          </>
-        )}
+        <span>{index}</span>
+        <span aria-hidden="true">—</span>
         <span>{label}</span>
-      </p>
+      </motion.p>
 
-      {/* ── Fraunces headline ─────────────────────────────── */}
-      {/* Accepts ReactNode so callers can inject <em className="text-em"> */}
-      <h2 className="text-heading text-text mb-0">{headline}</h2>
+      {/* Title & Description Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+        <motion.h2 variants={itemVariants} className="text-heading text-text">
+          {titleLine1}
+          <br />
+          <em className="italic text-gold">{titleLine2}</em>
+        </motion.h2>
 
-      {/* ── 32px gold accent line ─────────────────────────── */}
-      {accentLine && (
-        <span
-          aria-hidden="true"
-          className="block w-8 h-px bg-gold mt-6 mb-0"
-        />
-      )}
-
-      {/* ── Optional body copy ────────────────────────────── */}
-      {body && (
-        <p
-          className={cn(
-            "text-body text-muted mt-6",
-            centered ? "max-w-prose" : "max-w-[52ch]",
-          )}
+        <motion.p
+          variants={itemVariants}
+          className="text-body text-muted max-w-[44ch] lg:pb-1"
         >
-          {body}
-        </p>
-      )}
-    </header>
+          {description}
+        </motion.p>
+      </div>
+
+      {/* Gold accent line */}
+      <motion.span
+        variants={itemVariants}
+        aria-hidden="true"
+        className="block w-8 h-px bg-gold mt-8"
+      />
+    </motion.header>
   );
 }
+
+// import React from "react";
+
+// interface SectionHeaderProps {
+//   index: string;
+//   label: string;
+//   titleLine1: string;
+//   titleLine2: string;
+//   description: React.ReactNode;
+// }
+
+// export function SectionHeader({
+//   index,
+//   label,
+//   titleLine1,
+//   titleLine2,
+//   description,
+// }: SectionHeaderProps) {
+//   return (
+//     <header className="mb-16">
+//       {/* Label Section */}
+//       <p className="text-label text-gold flex items-center gap-2 mb-6">
+//         <span aria-hidden="true">§</span>
+//         <span>{index}</span>
+//         <span aria-hidden="true">—</span>
+//         <span>{label}</span>
+//       </p>
+
+//       {/* Title & Description Grid */}
+//       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+//         <h2 className="text-heading text-text">
+//           {titleLine1}
+//           <br />
+//           <em className="italic text-gold">{titleLine2}</em>
+//         </h2>
+
+//         <p className="text-body text-muted max-w-[44ch] lg:pb-1">
+//           {description}
+//         </p>
+//       </div>
+
+//       {/* Gold accent line */}
+//       <span aria-hidden="true" className="block w-8 h-px bg-gold mt-8" />
+//     </header>
+//   );
+// }
+
+// import { cn } from "@/lib/utils";
+
+// interface SectionHeaderProps {
+//   /** Small mono label above headline — e.g. "§ 01 — SELECTED WORK" */
+//   label: string;
+//   /** Optional section index prefix — e.g. "01" */
+//   index?: string;
+//   /** Large Fraunces headline */
+//   headline: React.ReactNode;
+//   /** Optional body copy in Geist light */
+//   body?: string;
+//   /** Alignment — default is start (left in LTR) */
+//   align?: "start" | "center";
+//   className?: string;
+// }
+
+// export function SectionHeader({
+//   label,
+//   index,
+//   // ----
+//   headline,
+//   body,
+//   align = "start",
+//   className,
+// }: SectionHeaderProps) {
+//   const centered = align === "center";
+
+//   return (
+//     <header
+//       className={cn(
+//         "flex flex-col",
+//         centered ? "items-center text-center" : "items-start",
+//         className,
+//       )}
+//     >
+//       {/* ── Small gold label ──────────────────────────────── */}
+//       <p className="text-label text-gold flex items-center gap-2 mb-6">
+//         <span aria-hidden="true">§</span>
+//         {index && (
+//           <>
+//             <span>{index}</span>
+//             <span aria-hidden="true">—</span>
+//           </>
+//         )}
+//         <span>{label}</span>
+//       </p>
+
+//       {/* ── Fraunces headline ─────────────────────────────── */}
+//       {/* Accepts ReactNode so callers can inject <em className="text-em"> */}
+//       <h2 className="text-heading text-text mb-0">{headline}</h2>
+
+//       {/* ── 32px gold accent line ─────────────────────────── */}
+
+//         <span
+//           aria-hidden="true"
+//           className="block w-8 h-px bg-gold mt-6 mb-0"
+//         />
+
+//       {/* ── Optional body copy ────────────────────────────── */}
+//       {body && (
+//         <p
+//           className={cn(
+//             "text-body text-muted mt-6",
+//             centered ? "max-w-prose" : "max-w-[52ch]",
+//           )}
+//         >
+//           {body}
+//         </p>
+//       )}
+//     </header>
+//   );
+// }

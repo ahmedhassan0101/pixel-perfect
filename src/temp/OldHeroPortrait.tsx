@@ -25,16 +25,16 @@
 
 "use client";
 
-import { useState }       from "react";
-import { motion }         from "framer-motion";
-import Image              from "next/image";
-import { cn }             from "@/lib/utils";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 // ── Types ─────────────────────────────────────────────────────
 
 interface HeroPortraitProps {
-  src?:      string;
-  alt?:      string;
+  src?: string;
+  alt?: string;
   className?: string;
 }
 
@@ -74,9 +74,7 @@ function PortraitPlaceholder() {
           className="block w-6 h-px bg-gold opacity-40"
           aria-hidden="true"
         />
-        <span className="text-label text-ghost">
-          Chiaroscuro
-        </span>
+        <span className="text-label text-ghost">Chiaroscuro</span>
         <span className="text-label text-ghost opacity-50">
           400 × 600px recommended
         </span>
@@ -84,11 +82,8 @@ function PortraitPlaceholder() {
 
       {/* Coordinate overlay */}
       <div className="absolute bottom-0 inset-x-0 bg-code-bg/80 px-4 py-2">
-        <p
-          className="text-label text-ghost"
-          style={{ fontSize: "9px" }}
-        >
-          33.8869° N, 9.5375° E
+        <p className="text-label text-ghost" style={{ fontSize: "9px" }}>
+          30.0444° N, 31.2357° E
         </p>
       </div>
     </div>
@@ -97,7 +92,11 @@ function PortraitPlaceholder() {
 
 // ── Component ─────────────────────────────────────────────────
 
-export function HeroPortrait({ src, alt = "Portrait", className }: HeroPortraitProps) {
+export function HeroPortrait({
+  src,
+  alt = "Portrait",
+  className,
+}: HeroPortraitProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -107,9 +106,9 @@ export function HeroPortrait({ src, alt = "Portrait", className }: HeroPortraitP
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{
-        delay:    0.3,
+        delay: 0.3,
         duration: 0.9,
-        ease:     [0.25, 0, 0, 1],
+        ease: [0.25, 0, 0, 1],
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -121,7 +120,7 @@ export function HeroPortrait({ src, alt = "Portrait", className }: HeroPortraitP
             src={src}
             alt={alt}
             fill
-            priority                      // LCP element — load immediately
+            priority // LCP element — load immediately
             sizes="(max-width: 768px) 0vw, 40vw"
             className="object-cover object-top"
             style={{

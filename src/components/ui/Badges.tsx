@@ -32,19 +32,22 @@ export interface TechBadgeProps extends HTMLAttributes<HTMLSpanElement> {
   accent?: boolean;
 }
 
-export function TechBadge({ accent = false, className, children, ...props }: TechBadgeProps) {
+export function TechBadge({
+  accent = false,
+  className,
+  children,
+  ...props
+}: TechBadgeProps) {
   return (
     <span
       className={cn(
         "inline-flex items-center",
         "font-mono text-[10px] font-normal",
         "tracking-widest uppercase leading-none",
-        "rounded-default",            // 2px — sharp, technical
+        "rounded-default", // 2px — sharp, technical
         "px-2 py-1",
         "border transition-base",
-        accent
-          ? "border-gold text-gold"
-          : "border-border text-muted",
+        accent ? "border-gold text-gold" : "border-border text-muted",
         className,
       )}
       {...props}
@@ -74,20 +77,45 @@ export function AvailabilityBadge({
       className={cn(
         "inline-flex items-center gap-2.5",
         "border border-gold text-gold",
-        "font-mono text-[11px] tracking-widest uppercase",
-        "px-4 py-2",
+        "font-mono text-[12px] tracking-widest uppercase",
+        "px-4 py-2 rounded-full", // rounded-pill — only exception in system
         "transition-base",
         className,
       )}
-      style={{ borderRadius: "9999px" }}   // rounded-pill — only exception in system
       {...props}
     >
       {/* Pulsing dot — CSS animation from globals.css */}
-      <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
-        <span className="pulse-ring absolute inset-0 rounded-full bg-emerald-500 opacity-75" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-      </span>
+      <PulsingDot />
       <span>{label}</span>
     </span>
   );
+}
+
+export const PulsingDot = () => (
+  <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
+    <span className="pulse-ring absolute inset-0 rounded-full bg-emerald-500 opacity-75" />
+    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+  </span>
+);
+
+type BadgeVariant = "live" | "in-progress" | "archived" | "tech";
+
+export function Badge({
+  children,
+  variant,
+}: {
+  children: React.ReactNode;
+  variant: BadgeVariant;
+}) {
+  const baseStyles =
+    "text-label bg-surface text-xs uppercase font-mono px-2 py-0.5";
+
+  const variants: Record<BadgeVariant, string> = {
+    live: "border border-gold",
+    "in-progress": "border border-border text-muted!",
+    archived: "",
+    tech: "border border-border ",
+  };
+
+  return <span className={cn(baseStyles, variants[variant])}>{children}</span>;
 }

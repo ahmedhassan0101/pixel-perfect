@@ -1,0 +1,23 @@
+{
+  "email": "hello@ahmedhassan.dev",
+  "availability": {
+    "status": true,
+    "availableText": "Available for new projects",
+    "unavailableText": "Currently unavailable",
+    "since": "January 2025",
+    "location": "Cairo / Remote / Worldwide"
+  },
+  "socials": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/",
+      "note": "Source code & contributions"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://linkedin.com/",
+      "note": "Professional history"
+    }
+  ],
+  "quote": "\"The best work comes from people who care about the craft — not just the deadline.\""
+}

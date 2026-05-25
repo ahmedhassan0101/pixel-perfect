@@ -20,8 +20,8 @@
  */
 
 import { type ButtonHTMLAttributes, type ReactNode } from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
-
 // ── Types ─────────────────────────────────────────────────────
 
 export type ButtonVariant = "primary" | "outline" | "ghost";
@@ -74,8 +74,8 @@ const VARIANTS: Record<ButtonVariant, string> = {
 };
 
 const SIZES: Record<ButtonSize, string> = {
-  sm: "px-4 py-2   text-label gap-1.5",
-  md: "px-6 py-2.5 text-label gap-2",
+  sm: "px-4 py-2   text-label! gap-1.5",
+  md: "px-6 py-2.5 text-label! gap-2",
 };
 
 // ── Component ─────────────────────────────────────────────────
@@ -128,5 +128,32 @@ export function Button({
         </span>
       )}
     </button>
+  );
+}
+
+
+
+
+
+
+interface LinkBtnProps {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function LinkBtn({ href, children, className }: LinkBtnProps) {
+  return (
+    <Link
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        "text-label text-muted! flex items-center gap-1.5 transition-base hover:text-text hover:underline-gold",
+        className
+      )}
+    >
+      {children}
+    </Link>
   );
 }

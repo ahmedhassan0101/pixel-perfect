@@ -1,0 +1,53 @@
+[
+  {
+    "category": "Frontend",
+    "index": "01",
+    "tools": [
+      { "name": "Next.js",     "status": "core",      "note": "App Router · RSC · SSG · ISR"      },
+      { "name": "React",       "status": "core",      "note": "Hooks · Context · Composition"     },
+      { "name": "TypeScript",  "status": "core",      "note": "Strict mode · Generics · Utility"  },
+      { "name": "Tailwind",    "status": "core",      "note": "v4 · CSS-first · @theme"           },
+      { "name": "Framer",      "status": "exploring", "note": "Purposeful animation only"         }
+    ]
+  },
+  {
+    "category": "Backend",
+    "index": "02",
+    "tools": [
+      { "name": "Node.js",     "status": "core",      "note": "Event loop · Streams · Clustering" },
+      { "name": "Express",     "status": "core",      "note": "REST · Middleware · Error handling" },
+      { "name": "REST API",    "status": "core",      "note": "Design · Versioning · Docs"        },
+      { "name": "WebSocket",   "status": "exploring", "note": "Real-time · Socket.io"             }
+    ]
+  },
+  {
+    "category": "Database",
+    "index": "03",
+    "tools": [
+      { "name": "MongoDB",     "status": "core",      "note": "Atlas · Aggregation · Indexing"    },
+      { "name": "Mongoose",    "status": "core",      "note": "Schema design · Virtuals · Hooks"  },
+      { "name": "Redis",       "status": "core",      "note": "Caching · Pub/Sub · Sessions"      },
+      { "name": "PostgreSQL",  "status": "exploring", "note": "Relational modeling · Joins"       }
+    ]
+  },
+  {
+    "category": "Infrastructure",
+    "index": "04",
+    "tools": [
+      { "name": "Vercel",      "status": "core",      "note": "Deploy · Edge · Analytics"         },
+      { "name": "Git",         "status": "core",      "note": "Branching · CI · Code review"      },
+      { "name": "Docker",      "status": "exploring", "note": "Containerization · Compose"        },
+      { "name": "Linux",       "status": "core",      "note": "CLI · Server mgmt · Shell"         }
+    ]
+  },
+  {
+    "category": "Tooling",
+    "index": "05",
+    "tools": [
+      { "name": "ESLint",      "status": "core",      "note": "Strict config · Custom rules"      },
+      { "name": "Zod",         "status": "core",      "note": "Runtime validation · Inference"    },
+      { "name": "Shiki",       "status": "core",      "note": "Server-side highlight · Zero JS"   },
+      { "name": "Turborepo",   "status": "exploring", "note": "Monorepo · Caching · Pipelines"    }
+    ]
+  }
+]

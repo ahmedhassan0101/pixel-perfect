@@ -19,7 +19,7 @@ import "./globals.css";
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
-  axes: ["SOFT", "WONK"],    // enables font-variation-settings in CSS
+  axes: ["SOFT", "WONK"], // enables font-variation-settings in CSS
   display: "swap",
 });
 
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   description:
     "Full-Stack Engineer building end-to-end systems with Node.js, Next.js, and React.",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"
+    process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000",
   ),
   openGraph: {
     type: "website",
@@ -66,13 +66,14 @@ export default function RootLayout({
       lang="en"
       className={`${fraunces.variable} ${geist.variable} ${geistMono.variable}`}
     >
-      <body>
+      <body className="antialiased">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:inset-s-4 focus:top-4 focus:z-9998 focus:bg-elevated focus:px-4 focus:py-2 focus:text-text focus:border focus:border-border"
         >
           Skip to content
         </a>
+
         {children}
       </body>
     </html>

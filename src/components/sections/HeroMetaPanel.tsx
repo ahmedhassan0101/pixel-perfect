@@ -21,77 +21,98 @@
  * Cursor blink uses .cursor-blink CSS class from globals.css.
  */
 
-const STATS = [
-  { value: "3+",  label: "Years building"   },
-  { value: "24+", label: "Projects shipped" },
-  { value: "480", label: "Problems solved"  },
-  { value: "100", label: "Lighthouse score" },
-] as const;
+"use client";
 
-const TERMINAL_LINES = [
-  { cmd: "whoami",       out: "full-stack-engineer"  },
-  { cmd: "location",     out: "remote / worldwide"   },
-  { cmd: "availability", out: "open — hire me"       },
-] as const;
+import { motion } from "framer-motion";
+import heroData from "@/data/hero.json";
 
-const STACK = [
-  "Next.js", "Node.js", "React",
-  "TypeScript", "MongoDB", "Tailwind",
-] as const;
+const EASE = [0.25, 0, 0, 1] as const;
+
+const fadeUp = (delay: number) => ({
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+  transition: { delay: delay / 1000, duration: 0.6, ease: EASE },
+});
+
+// const STATS = [
+//   { value: "3+", label: "Years building" },
+//   { value: "24+", label: "Projects shipped" },
+//   { value: "480", label: "Problems solved" },
+//   { value: "100", label: "Lighthouse score" },
+// ] as const;
+
+// const TERMINAL_LINES = [
+//   { cmd: "whoami", out: "full-stack-engineer" },
+//   { cmd: "location", out: "remote / worldwide" },
+//   { cmd: "availability", out: "open — hire me" },
+// ] as const;
+
+// const STACK = [
+//   "Next.js",
+//   "Node.js",
+//   "React",
+//   "TypeScript",
+//   "MongoDB",
+//   "Tailwind",
+// ] as const;
 
 export function HeroMetaPanel() {
+  const { stats, terminalLines, stack } = heroData.meta;
   return (
-    <div className="flex flex-col border border-border">
-
+    <div className="flex flex-col">
       {/* ── Block 1: Stats ────────────────────────────────── */}
-      <div className="grid grid-cols-2 gap-px bg-border border-b border-border">
-        {STATS.map(({ value, label }, i) => (
-          <div
-            key={label}
-            className="bg-bg px-5 py-6"
-          >
+      <motion.div
+        className="grid grid-cols-2 gap-px bg-border border border-border"
+        {...fadeUp(200)}
+      >
+        {stats.map(({ value, label }) => (
+          <div key={label} className="bg-bg px-5 py-6">
             {/* Large Fraunces numeral — the display scale for data */}
             <p
-              className="text-heading text-text mb-1 leading-none"
+              className="text-heading  mb-1 leading-none"
               aria-label={`${value} ${label}`}
             >
               {value}
             </p>
-            <p className="text-label text-muted">{label}</p>
+            <p className="text-label">{label}</p>
           </div>
         ))}
-      </div>
+      </motion.div>
 
       {/* ── Block 2: Terminal ─────────────────────────────── */}
-      <div className="border-b border-border">
+      <motion.div className="border border-border" {...fadeUp(400)}>
         {/* Titlebar */}
-        <div className="
+        <div
+          className="
           flex items-center justify-between
           bg-elevated border-b border-border
           px-4 py-2.5
-        ">
+        "
+        >
           {/* Window dots — purely decorative */}
           <div className="flex items-center gap-1.5" aria-hidden="true">
             <span className="block w-2.5 h-2.5 rounded-full bg-border" />
             <span className="block w-2.5 h-2.5 rounded-full bg-border" />
             <span className="block w-2.5 h-2.5 rounded-full bg-border" />
           </div>
-          <span className="text-label text-ghost">bash</span>
+          <span className="text-label text-ghost!">bash</span>
         </div>
 
         {/* Terminal lines */}
         <div className="bg-code-bg px-4 py-4 flex flex-col gap-2.5">
-          {TERMINAL_LINES.map(({ cmd, out }) => (
+          {terminalLines.map(({ cmd, out }) => (
             <div key={cmd}>
               {/* Command line */}
-              <p className="text-mono text-code-text" style={{ fontSize: "11px" }}>
-                <span className="text-gold">~ $</span>{" "}
-                <span>{cmd}</span>
+              <p
+                className="text-mono text-code-text"
+                style={{ fontSize: "12px" }}
+              >
+                <span className="text-gold">~ $</span> <span>{cmd}</span>
               </p>
               {/* Output line */}
               <p
                 className="text-mono ps-5"
-                style={{ fontSize: "11px", color: "var(--text-secondary)" }}
+                style={{ fontSize: "12px", color: "var(--text-secondary)" }}
               >
                 {out}
               </p>
@@ -99,7 +120,7 @@ export function HeroMetaPanel() {
           ))}
 
           {/* Blinking cursor line */}
-          <p className="text-mono text-gold" style={{ fontSize: "11px" }}>
+          <p className="text-mono text-gold" style={{ fontSize: "12px" }}>
             ~ ${" "}
             <span
               className="cursor-blink inline-block w-2 h-3.5 bg-gold align-middle"
@@ -107,23 +128,24 @@ export function HeroMetaPanel() {
             />
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* ── Block 3: Stack ────────────────────────────────── */}
-      <div className="px-5 py-5">
+      <motion.div className="px-5 py-5 border border-border" {...fadeUp(600)}>
         <p className="text-label text-ghost mb-4">Current stack</p>
         <div className="flex flex-wrap gap-x-3 gap-y-2 items-center">
-          {STACK.map((tech, i) => (
+          {stack.map((tech, i) => (
             <span key={tech} className="flex items-center gap-3">
               <span className="text-label text-muted">{tech}</span>
-              {i < STACK.length - 1 && (
-                <span className="text-gold text-label" aria-hidden="true">·</span>
+              {i < stack.length - 1 && (
+                <span className="text-gold text-label" aria-hidden="true">
+                  ·
+                </span>
               )}
             </span>
           ))}
         </div>
-      </div>
-
+      </motion.div>
     </div>
   );
 }

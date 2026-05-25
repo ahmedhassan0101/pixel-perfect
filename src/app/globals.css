@@ -61,8 +61,9 @@
   --spacing-section: 8rem;
   --spacing-section-sm: 5rem;
   --spacing-gutter: 1.25rem;
-  --spacing-gutter-lg: 3rem;
-  --width-content: 1100px;
+  --spacing-gutter-md: 2rem;
+  --spacing-gutter-lg: 4rem;
+  --width-content: 1400px;
   --width-prose: 58ch;
 
   /* ── Transitions ─────────────────────────────────────────── */
@@ -75,6 +76,8 @@
 
   /* ── Shadow — one only ──────────────────────────────────── */
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
+
+  --animate-scroll-pulse: scrollPulse 1.8s var(--ease-in) infinite;
 }
 
 /* ============================================================
@@ -249,13 +252,14 @@
   /* Fraunces variable: weight 300, italic for emphasis       */
   .text-display {
     font-family: var(--font-fraunces), Georgia, serif;
-    font-size: clamp(3.5rem, 9vw, 8rem);
+    /* font-size: clamp(3.5rem, 9vw, 8rem); */
+    font-size: clamp(3rem, 9vw, 5rem);
     font-weight: 300;
     line-height: 0.94;
     letter-spacing: -0.01em;
     font-variation-settings:
       "SOFT" 50,
-      "WONK" 1;
+      "WONK" 0;
   }
 
   /* ── Heading — section openers ──────────────────────────── */
@@ -301,7 +305,8 @@
   /* ── Label — smallest mono label ───────────────────────── */
   .text-label {
     font-family: var(--font-geist-mono), monospace;
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
+    /* font-size: 0.6875rem; */
     font-weight: 400;
     line-height: 1;
     text-transform: uppercase;
@@ -451,6 +456,20 @@
       transform: translateY(-6px);
     }
   }
+  @keyframes scrollPulse {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    20%,
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(200%);
+      opacity: 0;
+    }
+  }
 
   /* ============================================================
      SECTION 7 — LAYOUT UTILITIES
@@ -504,5 +523,14 @@
     overflow: visible;
     clip: auto;
     white-space: normal;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

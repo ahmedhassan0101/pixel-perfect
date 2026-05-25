@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
         hostname: "asset.imagine.art",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "preview.colorkit.co",
+        pathname: "/**",
+      },
     ],
   },
 };

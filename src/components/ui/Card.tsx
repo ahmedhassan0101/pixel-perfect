@@ -111,7 +111,7 @@ function CardImage({
           </svg>
           {/* Slot for overlay badges */}
           {children && (
-            <div className="absolute bottom-3 start-3 end-3 flex flex-wrap gap-1.5">
+            <div className="absolute bottom-3 inset-s-3 inset-e-3 flex flex-wrap gap-1.5">
               {children}
             </div>
           )}
@@ -119,7 +119,7 @@ function CardImage({
       )}
       {/* Overlay slot when src exists */}
       {src && children && (
-        <div className="absolute bottom-3 start-3 end-3 flex flex-wrap gap-1.5">
+        <div className="absolute bottom-3 inset-s-3 inset-e-3 flex flex-wrap gap-1.5">
           {children}
         </div>
       )}

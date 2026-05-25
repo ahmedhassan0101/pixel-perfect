@@ -1,0 +1,23 @@
+[
+  {
+    "id": "01",
+    "titleBase": "Structure",
+    "titleEm": "before aesthetics.",
+    "body": "I map the data architecture before I open Figma. Systems that scale are designed from the state outward — the interface is a consequence of good architecture, not the other way around.",
+    "label": "Engineering Philosophy"
+  },
+  {
+    "id": "02",
+    "titleBase": "Performance is",
+    "titleEm": "a form of respect.",
+    "body": "Every unnecessary kilobyte, every blocking request, every layout shift is a decision made against the person using what I built. Speed is not a feature to add later. It is the baseline.",
+    "label": "User Philosophy"
+  },
+  {
+    "id": "03",
+    "titleBase": "Interfaces",
+    "titleEm": "have opinions.",
+    "body": "Every color, every radius, every spacing value is a decision. I refuse templates because they carry someone else's decisions. This portfolio was built token by token, argument by argument.",
+    "label": "Design Philosophy"
+  }
+]
