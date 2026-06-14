@@ -1,89 +1,139 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import Reveal from "./Reveal";
 
 interface SectionHeaderProps {
-  index: string;
   label: string;
   titleLine1: string;
   titleLine2: string;
   description: React.ReactNode;
 }
 export function SectionHeader({
-  index,
   label,
   titleLine1,
   titleLine2,
   description,
 }: SectionHeaderProps) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.25, 0.1, 0.25, 1] as const,
-      },
-    },
-  };
-
   return (
-    <motion.header
-      className="mb-16"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-    >
+    <header className="mb-16">
       {/* Label Section */}
-      <motion.p
-        variants={itemVariants}
-        className="text-label text-gold! flex items-center gap-2 mb-6"
-      >
-        <span aria-hidden="true">§</span>
-        <span>{index}</span>
-        <span aria-hidden="true">—</span>
-        <span>{label}</span>
-      </motion.p>
+      <Reveal activeClass="animate-fade-up animate-delay-100">
+        <p className="text-label text-gold! flex items-center gap-2 mb-6 ">
+          <span>{label}</span>
+        </p>
+      </Reveal>
 
       {/* Title & Description Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
-        <motion.h2 variants={itemVariants} className="text-heading text-text">
-          {titleLine1}
-          <br />
-          <em className="italic text-gold">{titleLine2}</em>
-        </motion.h2>
-
-        <motion.p
-          variants={itemVariants}
-          className="text-body text-muted max-w-[44ch] lg:pb-1"
-        >
-          {description}
-        </motion.p>
+        <Reveal activeClass="animate-fade-up animate-delay-100">
+          <h2 className="text-heading text-text timeline-view">
+            {titleLine1}
+            <br />
+            <em className="italic text-gold">{titleLine2}</em>
+          </h2>
+        </Reveal>
+        <Reveal activeClass="animate-fade animate-delay-600">
+          <p className="text-body text-muted max-w-[44ch] lg:pb-1">
+            {description}
+          </p>
+        </Reveal>
       </div>
 
       {/* Gold accent line */}
-      <motion.span
-        variants={itemVariants}
-        aria-hidden="true"
-        className="block w-8 h-px bg-gold mt-8"
-      />
-    </motion.header>
+      <Reveal activeClass="animate-fade-right animate-delay-300">
+        <span
+          aria-hidden="true"
+          className="block w-8 h-px bg-gold mt-8 timeline-view"
+        />
+      </Reveal>
+    </header>
   );
 }
 
+// ----------------------------------
+// "use client";
+
+// import React from "react";
+// import { motion } from "framer-motion";
+
+// interface SectionHeaderProps {
+//   label: string;
+//   titleLine1: string;
+//   titleLine2: string;
+//   description: React.ReactNode;
+// }
+// export function SectionHeader({
+//   label,
+//   titleLine1,
+//   titleLine2,
+//   description,
+// }: SectionHeaderProps) {
+//   const containerVariants = {
+//     hidden: { opacity: 0 },
+//     visible: {
+//       opacity: 1,
+//       transition: {
+//         staggerChildren: 0.15,
+//       },
+//     },
+//   };
+
+//   const itemVariants = {
+//     hidden: { opacity: 0, y: 20 },
+//     visible: {
+//       opacity: 1,
+//       y: 0,
+//       transition: {
+//         duration: 0.7,
+//         ease: [0.25, 0.1, 0.25, 1] as const,
+//       },
+//     },
+//   };
+
+//   return (
+//     <motion.header
+//       className="mb-16"
+//       variants={containerVariants}
+//       initial="hidden"
+//       whileInView="visible"
+//       viewport={{ once: true, margin: "-100px" }}
+//     >
+//       {/* Label Section */}
+//       <motion.p
+//         variants={itemVariants}
+//         className="text-label text-gold! flex items-center gap-2 mb-6"
+//       >
+//         <span>{label}</span>
+//       </motion.p>
+
+//       {/* Title & Description Grid */}
+//       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+//         <motion.h2 variants={itemVariants} className="text-heading text-text">
+//           {titleLine1}
+//           <br />
+//           <em className="italic text-gold">{titleLine2}</em>
+//         </motion.h2>
+
+//         <motion.p
+//           variants={itemVariants}
+//           className="text-body text-muted max-w-[44ch] lg:pb-1"
+//         >
+//           {description}
+//         </motion.p>
+//       </div>
+
+//       {/* Gold accent line */}
+//       <motion.span
+//         variants={itemVariants}
+//         aria-hidden="true"
+//         className="block w-8 h-px bg-gold mt-8"
+//       />
+//     </motion.header>
+//   );
+// }
+
+// ---------------------------------------------------
 // import React from "react";
 
 // interface SectionHeaderProps {

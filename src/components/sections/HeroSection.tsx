@@ -31,24 +31,20 @@ export function HeroSection() {
       id="hero"
       aria-label="Introduction"
       heroSection
-      className="relative min-h-dvh pt-16 pb-16 overflow-hidden"
-      containerClassName="h-full"
+      className="relative min-h-dvh pt-32 lg:pt-16 pb-24 overflow-hidden flex flex-col"
+      containerClassName="h-full flex-1 flex flex-col"
     >
       <div
         className="
-            grid grid-cols-1 lg:grid-cols-[60fr_40fr]
-            gap-12 lg:gap-0
-            min-h-[calc(100dvh-8rem)]
-            items-center
-          "
+          grid grid-cols-1 lg:grid-cols-[60fr_40fr]
+          flex-1 min-h-[calc(100dvh-10rem)]
+          items-center
+        "
       >
-        {/* ── Left: Cinematic content ─────────────────── */}
-        <div className="lg:pe-16 lg:border-e lg:border-border flex flex-col justify-center">
+        <div className="flex flex-col justify-center py-10 lg:py-0 border-b lg:border-b-0 border-border lg:border-e lg:pe-16">
           <HeroContent />
         </div>
-
-        {/* ── Right: Metadata panel ───────────────────── */}
-        <div className="lg:ps-12 flex flex-col justify-center">
+        <div className="flex flex-col justify-center py-10 lg:py-0 lg:ps-12">
           <HeroMetaPanel />
         </div>
       </div>
@@ -60,18 +56,21 @@ export function HeroSection() {
 
 function ScrollIndicator() {
   return (
-    <div
+       <div
       aria-hidden="true"
       className="
-        absolute bottom-6 inset-s-0 inset-e-0
+        absolute bottom-8 inset-s-0 inset-e-0
         flex flex-col items-center gap-2
         pointer-events-none
       "
     >
-      <span className="block w-px h-8 bg-border relative overflow-hidden">
+      <span className="block w-px h-10 bg-border relative overflow-hidden">
         <span className="absolute inset-x-0 top-0 h-1/2 bg-gold animate-scroll-pulse" />
       </span>
-      <p className="text-label text-ghost! ">scroll</p>
+      <p className="text-label text-ghost tracking-widest uppercase text-[10px]">
+        Scroll
+      </p>
     </div>
+ 
   );
 }

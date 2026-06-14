@@ -1,40 +1,16 @@
-/**
- * AboutSection.tsx — Server Component
- *
- * Reads from about.json. Renders identity, professional traits,
- * and work experience in a structured editorial layout.
- *
- * This section sits between Manifesto and Work in the page narrative:
- *
- *   Hero       → who I am (headline level)
- *   Manifesto  → how I think (principles)
- *   About      → who I am (ground level — the human, the history)
- *   Work       → what I shipped
- *
- * Layout:
- *   Top: bio paragraphs (Geist light, prose width)
- *   Mid: three trait cards in a bordered grid
- *   Bot: experience entry (timeline style, left border accent)
- *
- * Zero inline styles. All values from CSS variables via Tailwind.
- * Server Component — no client JS needed.
- */
-
 import aboutData from "@/data/about.json";
+import { Section } from "../ui/Section";
+import { SectionHeader } from "../ui/SectionHeader";
+import Reveal from "../ui/Reveal";
 
 // ── Types ─────────────────────────────────────────────────────
-
-interface Trait {
-  label: string;
-  description: string;
-}
 
 interface Contribution {
   label: string;
   detail: string;
 }
 
-interface Experience {
+interface ExperienceData {
   id: string;
   company: string;
   role: string;
@@ -43,67 +19,52 @@ interface Experience {
   contributions: Contribution[];
 }
 
-// ── Sub-components ────────────────────────────────────────────
+// ── Experience entry — timeline style ─────────────────────────
+// Flat row layout: scales to multiple companies without ballooning.
+// Left gold accent border signals "this is a timeline entry."
 
-function TraitCard({ label, description }: Trait) {
+function ExperienceEntry({ exp }: { exp: ExperienceData }) {
   return (
-    <div className="bg-bg border-e border-border last:border-e-0 p-6 flex flex-col gap-4">
-      {/* Label — the name of the trait, not a buzzword */}
-      <p className="text-label text-gold">{label}</p>
-
-      {/* Separator */}
-      <span className="block w-full h-px bg-border" aria-hidden="true" />
-
-      {/* Description */}
-      <p className="text-body text-muted leading-relaxed flex-1">
-        {description}
-      </p>
-    </div>
-  );
-}
-
-function ExperienceEntry({ exp }: { exp: Experience }) {
-  return (
-    <article className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-0 border border-border">
-      {/* ── Left: Company meta ─────────────────────────── */}
-      <div
-        className="
-        bg-surface border-b lg:border-b-0 lg:border-e border-border
-        px-6 py-8
-        flex flex-col justify-between gap-6
-      "
-      >
-        <div className="flex flex-col gap-1">
-          <p className="text-label text-ghost">{exp.type}</p>
-          <p className="text-label text-ghost">{exp.period}</p>
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <p className="text-body text-text font-medium">{exp.company}</p>
-          <p className="text-label text-muted">{exp.role}</p>
-        </div>
+    <article
+      className="
+      group
+      border-s-2 border-s-border
+      ps-6
+      transition-base
+      hover:border-s-gold
+    "
+    >
+      {/* ── Meta row: period + type ──────────────────────── */}
+      <div className="flex items-center gap-3 mb-2">
+        <p className="text-label">{exp.period}</p>
+        <span className="w-px h-3 bg-border" aria-hidden="true" />
+        <p className="text-label">{exp.type}</p>
       </div>
 
-      {/* ── Right: Contributions ───────────────────────── */}
-      <div className="flex flex-col">
-        {exp.contributions.map(({ label, detail }, i) => (
-          <div
-            key={label}
-            className={[
-              "flex flex-col gap-2 px-6 py-5",
-              "border-s-2 border-s-border ms-0",
-              "transition-base hover:border-s-gold hover:bg-surface",
-              i > 0 ? "border-t border-border" : "",
-            ].join(" ")}
-          >
-            {/* Contribution label */}
-            <p className="text-label text-gold">{label}</p>
+      {/* ── Company + role ───────────────────────────────── */}
+      <div className="flex items-baseline gap-3 mb-5">
+        <h3 className="text-subheading text-text transition-base group-hover:text-gold">
+          {exp.company}
+        </h3>
+        <span className="text-label text-muted">{exp.role}</span>
+      </div>
 
-            {/* Detail */}
-            <p className="text-body text-muted leading-relaxed">{detail}</p>
-          </div>
+      {/* ── Contributions — compact list ─────────────────── */}
+      <ul className="flex flex-col gap-3">
+        {exp.contributions.map(({ label, detail }) => (
+          <li key={label} className="flex gap-3 items-start">
+            <span
+              className="mt-[0.45em] block w-1.5 h-1.5 bg-gold shrink-0 rounded-none"
+              aria-hidden="true"
+            />
+            <p className="text-body text-muted leading-relaxed">
+              <span className="text-text font-medium">{label}</span>
+              {" — "}
+              {detail}
+            </p>
+          </li>
         ))}
-      </div>
+      </ul>
     </article>
   );
 }
@@ -111,74 +72,31 @@ function ExperienceEntry({ exp }: { exp: Experience }) {
 // ── Main section ──────────────────────────────────────────────
 
 export function AboutSection() {
-  const { name, bio, traits, experience } = aboutData;
+  const { name, bio, experience } = aboutData;
 
   return (
-    <section
-      id="about"
-      className="section-padding border-b border-border"
-      aria-label="About"
-    >
-      <div className="container-content">
-        {/* ── Section header ───────────────────────────── */}
-        <header className="mb-16">
-          <p className="text-label text-gold flex items-center gap-2 mb-6">
-            <span aria-hidden="true">§</span>
-            <span>02</span>
-            <span aria-hidden="true">—</span>
-            <span>The Engineer</span>
-          </p>
+    <Section id="about" aria-label="About">
+      {/* ── Section header ───────────────────────────── */}
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
-            <h2 className="text-heading text-text">
-              {name}.
-              <br />
-              <em
-                className="not-italic"
-                style={{ fontStyle: "italic", color: "var(--accent-gold)" }}
-              >
-                Full-Stack.
-              </em>
-            </h2>
-
-            {/* First bio paragraph in the header */}
-            <p className="text-body text-muted max-w-[44ch] lg:pb-1">
-              {bio[0]}
-            </p>
-          </div>
-
-          <span aria-hidden="true" className="block w-8 h-px bg-gold mt-8" />
-        </header>
-
-        {/* ── Extended bio ────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 mb-16 pb-16 border-b border-border">
-          {bio.slice(1).map((paragraph, i) => (
-            <p key={i} className="text-body text-muted leading-relaxed">
-              {paragraph}
-            </p>
-          ))}
-        </div>
-
-        {/* ── Trait cards ─────────────────────────────── */}
-        <div className="mb-16">
-          <p className="text-label text-ghost mb-8">How I work</p>
-          <div className="border border-border grid grid-cols-1 lg:grid-cols-3">
-            {traits.map((trait) => (
-              <TraitCard key={trait.label} {...trait} />
-            ))}
-          </div>
-        </div>
-
-        {/* ── Experience ──────────────────────────────── */}
+      <SectionHeader
+        label="The Engineer"
+        titleLine1={name}
+        titleLine2="Self-Taught."
+        description={bio}
+      />
+      {/* ── Experience ──────────────────────────────── */}
+      <Reveal activeClass="animate-fade-up animate-delay-100">
         <div>
-          <p className="text-label text-ghost mb-8">Experience</p>
-          <div className="flex flex-col gap-4">
+          <p className="text-label mb-8">Experience</p>
+
+          {/* Gap between entries — generous but not wasteful */}
+          <div className="flex flex-col gap-10">
             {experience.map((exp) => (
-              <ExperienceEntry key={exp.id} exp={exp as Experience} />
+              <ExperienceEntry key={exp.id} exp={exp as ExperienceData} />
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </Reveal>
+    </Section>
   );
 }

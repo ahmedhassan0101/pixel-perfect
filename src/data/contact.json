@@ -1,5 +1,5 @@
 {
-  "email": "hello@ahmedhassan.dev",
+  "email": "ahmedhassan.allatif@gmail.com",
   "availability": {
     "status": true,
     "availableText": "Available for new projects",
@@ -10,12 +10,12 @@
   "socials": [
     {
       "label": "GitHub",
-      "href": "https://github.com/",
+      "href": "https://github.com/ahmedhassan0101",
       "note": "Source code & contributions"
     },
     {
       "label": "LinkedIn",
-      "href": "https://linkedin.com/",
+      "href": "https://www.linkedin.com/in/ahmed-allatif",
       "note": "Professional history"
     }
   ],

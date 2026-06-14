@@ -10,6 +10,7 @@
 
 import type { Metadata } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 // ── Fraunces — the human voice ────────────────────────────────────────────────
@@ -34,6 +35,14 @@ const geist = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// ── Hugh is Life Personal — the personal touch ─────────────────────────────────
+const hughIsLifePersonal = localFont({
+  src: "./../fonts/HughIsLifePersonal.woff2",
+  variable: "--font-hugh-is-life-personal",
+  weight: "400",
   display: "swap",
 });
 
@@ -64,7 +73,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${geist.variable} ${geistMono.variable}`}
+      className={`${fraunces.variable} ${geist.variable} ${geistMono.variable} ${hughIsLifePersonal.variable}`}
     >
       <body className="antialiased">
         <a

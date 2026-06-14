@@ -3,41 +3,64 @@
     "category": "Frontend",
     "index": "01",
     "tools": [
-      { "name": "Next.js", "status": "core", "note": "App Router, RSC, SSG" },
-      { "name": "React", "status": "core", "note": "Hooks, Context, Patterns" },
+      { "name": "Next.js", "status": "core", "note": "App Router . RSC . SSG" },
+      { "name": "React", "status": "core", "note": "Hooks . Context . Patterns" },
       { "name": "TypeScript", "status": "core", "note": "Strict mode always" },
-      { "name": "Tailwind", "status": "core", "note": "v4, CSS-first config" },
-      { "name": "Framer Motion", "status": "exploring", "note": "Purposeful animation" }
+      { "name": "Tailwind", "status": "core", "note": "v4 . CSS-first config" }
     ]
   },
   {
     "category": "Backend",
     "index": "02",
     "tools": [
-      { "name": "Node.js", "status": "core", "note": "Event loop, streams" },
-      { "name": "Express", "status": "core", "note": "REST, middleware" },
-      { "name": "REST API", "status": "core", "note": "Design & documentation" },
-      { "name": "GraphQL", "status": "exploring", "note": "Schema stitching" }
+      {
+        "name": "Express",
+        "status": "core",
+        "note": "REST · Middleware · Error handling"
+      },
+      {
+        "name": "REST API",
+        "status": "core",
+        "note": "Design · Versioning · Docs"
+      },
+      {
+        "name": "WebSocket",
+        "status": "exploring",
+        "note": "Real-time · Socket.io"
+      }
     ]
   },
   {
     "category": "Database",
     "index": "03",
     "tools": [
-      { "name": "MongoDB", "status": "core", "note": "Atlas, aggregation" },
-      { "name": "Mongoose", "status": "core", "note": "Schema design" },
-      { "name": "Redis", "status": "exploring", "note": "Caching, pub/sub" },
-      { "name": "Postgres", "status": "exploring", "note": "Relational modeling" }
+      {
+        "name": "MongoDB",
+        "status": "core",
+        "note": "Atlas · Aggregation · Indexing"
+      },
+      {
+        "name": "Mongoose",
+        "status": "core",
+        "note": "Schema design · Virtuals · Hooks"
+      },
+      {
+        "name": "Redis",
+        "status": "exploring",
+        "note": "Caching · Pub/Sub · Sessions"
+      }
     ]
   },
   {
     "category": "Infrastructure",
     "index": "04",
     "tools": [
-      { "name": "Vercel", "status": "core", "note": "Deploy, edge functions" },
-      { "name": "Git", "status": "core", "note": "Branching, CI workflow" },
-      { "name": "Docker", "status": "exploring", "note": "Containerization" },
-      { "name": "Linux", "status": "core", "note": "CLI, server management" }
+      { "name": "Vercel", "status": "core", "note": "Deploy" },
+      {
+        "name": "Git",
+        "status": "core",
+        "note": "Branching · CI · Code review"
+      }
     ]
   },
   {
@@ -45,9 +68,7 @@
     "index": "05",
     "tools": [
       { "name": "ESLint", "status": "core", "note": "Strict config" },
-      { "name": "Zod", "status": "core", "note": "Runtime validation" },
-      { "name": "Shiki", "status": "core", "note": "Syntax highlight" },
-      { "name": "Storybook", "status": "exploring", "note": "Component docs" }
+      { "name": "Zod", "status": "core", "note": "Runtime validation" }
     ]
   }
 ]

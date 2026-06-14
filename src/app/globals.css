@@ -12,6 +12,7 @@
    ============================================================ */
 
 @import "tailwindcss";
+@import "tailwindcss-animated";
 
 /* ============================================================
    SECTION 1 — @theme
@@ -26,6 +27,7 @@
   --font-serif: var(--font-fraunces);
   --font-sans: var(--font-geist);
   --font-mono: var(--font-geist-mono);
+  --font-personal: var(--font-hugh-is-life-personal);
 
   /* ── Colors — raw palette → utility classes ────────────── */
 
@@ -58,8 +60,10 @@
   --radius-pill: 9999px;
 
   /* ── Spacing extras ─────────────────────────────────────── */
-  --spacing-section: 8rem;
-  --spacing-section-sm: 5rem;
+  /* --spacing-section: 8rem;
+  --spacing-section-sm: 5rem; */
+  --spacing-section: clamp(4rem, 6vw + 2rem, 8rem);
+  --spacing-section-sm: clamp(2.5rem, 4vw + 1rem, 5rem);
   --spacing-gutter: 1.25rem;
   --spacing-gutter-md: 2rem;
   --spacing-gutter-lg: 4rem;
@@ -162,6 +166,7 @@
   /* Fixed position = renders once on GPU, never repaints    */
   /* on scroll. Gemini's concern addressed: position:fixed   */
   /* + will-change:transform = zero scroll performance cost. */
+
   html::before {
     content: "";
     position: fixed;
@@ -169,10 +174,7 @@
     z-index: 9999;
     pointer-events: none;
     opacity: 0.035;
-    will-change: transform; /* composited on GPU layer — no repaint */
-
-    /* SVG fractal noise — the difference between a           */
-    /* photograph and a screen render.                       */
+    will-change: transform;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23grain)'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 300px 300px;
@@ -272,6 +274,15 @@
     font-variation-settings:
       "SOFT" 50,
       "WONK" 1;
+  }
+
+  .text-personal {
+    font-family: var(--font-fraunces), cursive;
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    color: var(--accent-gold);
   }
 
   /* ── Subheading — Geist, light ──────────────────────────── */

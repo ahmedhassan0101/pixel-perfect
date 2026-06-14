@@ -4,44 +4,48 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border" role="contentinfo">
-      {/* ── Coordinates bar ───────────────────────────────── */}
-      <div className="border-b border-border">
-        <div className="container-content py-2 flex items-center justify-between text-label text-[9px]!">
-          <span>30.0444° N, 31.2357° E</span>
-          <span>Portfolio v3.0 · {year}</span>
+    <footer role="contentinfo">
+      <div className="container-content py-10 md:py-12">
+        {/* ── The Signature (Your Logo) ────────────────────────── */}
+        <div className="flex justify-center mb-10 md:mb-12">
+          <span className="text-personal text-muted! transition-colors duration-500 hover:text-gold! cursor-default">
+            Ahmed Hassan
+          </span>
         </div>
-      </div>
 
-      {/* ── Main footer bar ───────────────────────────────── */}
-      <div className="container-content py-5">
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          {/* Left: rights */}
-          <p className="text-label">© {year} — All rights reserved</p>
-
-          {/* Center: built with */}
-          <p className="text-label">
-            Built with{" "}
-            <span className="text-muted">
-              Next.js · Tailwind v4 · Framer Motion
-            </span>
+        {/* ── The Footer Meta (Rights, Stack, Back to top) ────── */}
+        <div
+          className="
+          flex flex-col lg:flex-row 
+          items-center justify-between 
+          gap-6 md:gap-4
+          border-t border-border/50 pt-6
+        "
+        >
+          {/* Left: Rights */}
+          <p className="text-label text-muted text-center lg:text-left order-2 lg:order-1">
+            © {year} — Engineered with intent.
           </p>
 
-          {/* Right: back to top */}
+          {/* Center: Stack */}
+          <p className="text-label text-ghost text-center order-3 lg:order-2">
+            Built with <span className="text-muted">Next.js & Tailwind</span>
+          </p>
+
+          {/* Right: Back to top */}
           <a
             href="#hero"
             className="
-              inline-flex items-center gap-2
-              text-label
-              transition-base hover:text-muted
-              group
+              inline-flex items-center justify-center gap-2
+              text-label text-muted transition-base hover:text-gold
+              group order-1 lg:order-3
             "
             aria-label="Back to top"
           >
             <span>Back to top</span>
             <ArrowUp
-              size={11}
-              className="transition-base group-hover:-translate-y-0.5"
+              size={12}
+              className="transition-base group-hover:-translate-y-1"
               aria-hidden="true"
             />
           </a>

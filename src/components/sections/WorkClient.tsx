@@ -24,9 +24,12 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "@/lib/utils";
-import type { Project, FilterValue } from "../../lib/types";
-import { FILTERS } from "../../lib/types";
+// import { cn } from "@/lib/utils";
+import type {
+  Project,
+  // , FilterValue
+} from "../../lib/types";
+// import { FILTERS } from "../../lib/types";
 import { ProjectCard } from "../ui/ProjectCard";
 import { Button } from "../ui/Button";
 
@@ -41,54 +44,57 @@ export function WorkClient({
   featured: Project[];
   rest: Project[];
 }) {
-  const [filter, setFilter] = useState<FilterValue>("all");
+  // const [filter, setFilter] = useState<FilterValue>("all");
   const [showAll, setShowAll] = useState(false);
 
   // 1. FILTER LOGIC:
   // We only filter the 'rest' array. Featured projects bypass this logic
   // and are always displayed at the top regardless of the selected category.
   // Filter rest projects (featured are never filtered)
-  const filtered =
-    filter === "all"
-      ? rest
-      : rest.filter((p) =>
-          p.category.includes(filter as Project["category"][number]),
-        );
+  // const filtered =
+  //   filter === "all"
+  //     ? rest
+  //     : rest.filter((p) =>
+  //         p.category.includes(filter as Project["category"][number]),
+  //       );
 
   // 2. PAGINATION / VISIBILITY LOGIC:
   // If 'showAll' is true, render all filtered projects.
   // Otherwise, slice the array to show only the initial limit (6 projects).
-  const visible = showAll ? filtered : filtered.slice(0, INITIAL_VISIBLE);
+  // const visible = showAll ? filtered : filtered.slice(0, INITIAL_VISIBLE);
+  const visible = showAll ? rest : rest.slice(0, INITIAL_VISIBLE);
 
   // Boolean flag to determine if the "Show More" button should be rendered.
-  const hasMore = filtered.length > INITIAL_VISIBLE;
+  // const hasMore = filtered.length > INITIAL_VISIBLE;
+  const hasMore = rest.length > INITIAL_VISIBLE;
 
   // Calculate exactly how many projects are hidden to display in the button.
-  const hiddenCount = filtered.length - INITIAL_VISIBLE;
+  // const hiddenCount = filtered.length - INITIAL_VISIBLE;
+  const hiddenCount = rest.length - INITIAL_VISIBLE;
 
   // 3. BADGE COUNTERS LOGIC:
   // Iterate through all possible filters to calculate how many projects
   // belong to each category. This populates the numbers next to the filter labels.
-  const counts = FILTERS.reduce<Record<FilterValue, number>>(
-    (acc, { value }) => {
-      acc[value] =
-        value === "all"
-          ? rest.length
-          : rest.filter((p) =>
-              p.category.includes(value as Project["category"][number]),
-            ).length;
-      return acc;
-    },
-    {} as Record<FilterValue, number>,
-  );
+  // const counts = FILTERS.reduce<Record<FilterValue, number>>(
+  //   (acc, { value }) => {
+  //     acc[value] =
+  //       value === "all"
+  //         ? rest.length
+  //         : rest.filter((p) =>
+  //             p.category.includes(value as Project["category"][number]),
+  //           ).length;
+  //     return acc;
+  //   },
+  //   {} as Record<FilterValue, number>,
+  // );
 
   // 4. EVENT HANDLER: FILTER CHANGE
   // When a user clicks a new filter category, we update the active filter
   // and immediately collapse the grid back to its initial state (INITIAL_VISIBLE).
-  function handleFilterChange(value: FilterValue) {
-    setFilter(value);
-    setShowAll(false);
-  }
+  // function handleFilterChange(value: FilterValue) {
+  //   setFilter(value);
+  //   setShowAll(false);
+  // }
 
   // 5. EVENT HANDLER: SHOW LESS & SCROLL
   // Collapses the grid and smoothly scrolls the user's viewport back up
@@ -119,11 +125,11 @@ export function WorkClient({
 
       {/* ── Filter bar ─────────────────────────────────────── */}
       <div id="project-filters" className="scroll-mt-32">
-        <FilterBar
+        {/*  <FilterBar
           active={filter}
           onChange={handleFilterChange}
           counts={counts}
-        />
+        />*/}
       </div>
 
       {/* ── Project grid ───────────────────────────────────── */}
@@ -152,13 +158,15 @@ export function WorkClient({
             <span className="group-hover:text-gold transition-base">
               {hiddenCount}
             </span>{" "}
-            more <span>{filter === "all" ? "" : `in ${filter}`}</span>
+            more
+            {/* <span>{filter === "all" ? "" : `in ${filter}`}</span> */}
           </Button>
         </div>
       )}
 
       {/* ── Show less — collapses back ──────────────────────── */}
-      {showAll && filtered.length > INITIAL_VISIBLE && (
+      {/* {showAll && filtered.length > INITIAL_VISIBLE && ( */}
+      {showAll && rest.length > INITIAL_VISIBLE && (
         <div className="mt-8 flex justify-center">
           <Button variant="outline" onClick={handleShowLess}>
             Show less
@@ -171,54 +179,54 @@ export function WorkClient({
 
 // ── Filter bar ────────────────────────────────────────────────
 
-function FilterBar({
-  active,
-  onChange,
-  counts,
-}: {
-  active: FilterValue;
-  onChange: (v: FilterValue) => void;
-  counts: Record<FilterValue, number>;
-}) {
-  return (
-    <div
-      role="toolbar"
-      aria-label="Filter projects by technology"
-      className="
-        flex items-center
-        border border-border mb-10
-        overflow-x-auto hide-scrollbar
-      "
-    >
-      {FILTERS.map(({ label, value }) => {
-        const isActive = active === value;
-        return (
-          <button
-            key={value}
-            onClick={() => onChange(value)}
-            aria-pressed={isActive}
-            className={cn(
-              "text-label shrink-0 whitespace-nowrap px-5 py-3",
-              "border-e border-border last:border-e-0",
-              "transition-base",
-              "flex items-center gap-2",
-              isActive
-                ? "text-text bg-surface"
-                : "text-ghost hover:text-muted hover:bg-surface/50",
-            )}
-          >
-            {label}
-            <span
-              className={cn(
-                "text-label transition-base",
-                isActive ? "text-gold" : "text-ghost",
-              )}
-            >
-              {counts[value]}
-            </span>
-          </button>
-        );
-      })}
-    </div>
-  );
-}
+// function FilterBar({
+//   active,
+//   onChange,
+//   counts,
+// }: {
+//   active: FilterValue;
+//   onChange: (v: FilterValue) => void;
+//   counts: Record<FilterValue, number>;
+// }) {
+//   return (
+//     <div
+//       role="toolbar"
+//       aria-label="Filter projects by technology"
+//       className="
+//         flex items-center
+//         border border-border mb-10
+//         overflow-x-auto hide-scrollbar
+//       "
+//     >
+//       {FILTERS.map(({ label, value }) => {
+//         const isActive = active === value;
+//         return (
+//           <button
+//             key={value}
+//             onClick={() => onChange(value)}
+//             aria-pressed={isActive}
+//             className={cn(
+//               "text-label shrink-0 whitespace-nowrap px-5 py-3",
+//               "border-e border-border last:border-e-0",
+//               "transition-base",
+//               "flex items-center gap-2",
+//               isActive
+//                 ? "text-text bg-surface"
+//                 : "text-ghost hover:text-muted hover:bg-surface/50",
+//             )}
+//           >
+//             {label}
+//             <span
+//               className={cn(
+//                 "text-label transition-base",
+//                 isActive ? "text-gold" : "text-ghost",
+//               )}
+//             >
+//               {counts[value]}
+//             </span>
+//           </button>
+//         );
+//       })}
+//     </div>
+//   );
+// }

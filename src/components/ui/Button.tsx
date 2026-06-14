@@ -25,15 +25,15 @@ import { cn } from "@/lib/utils";
 // ── Types ─────────────────────────────────────────────────────
 
 export type ButtonVariant = "primary" | "outline" | "ghost";
-export type ButtonSize    = "sm" | "md";
+export type ButtonSize = "sm" | "md";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?:   ButtonVariant;
-  size?:      ButtonSize;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   /** Icon rendered before the label */
   iconStart?: ReactNode;
   /** Icon rendered after the label */
-  iconEnd?:   ReactNode;
+  iconEnd?: ReactNode;
   /** Stretch to fill parent width */
   fullWidth?: boolean;
 }
@@ -46,11 +46,9 @@ const VARIANTS: Record<ButtonVariant, string> = {
    * The only filled button in the system.
    * Hover: opacity drops to 0.85 — no color change.
    */
-  primary: [
-    "bg-text text-bg",
-    "border border-text",
-    "hover:opacity-85",
-  ].join(" "),
+  primary: ["bg-text text-bg", "border border-text", "hover:opacity-85"].join(
+    " ",
+  ),
 
   /**
    * outline — transparent with visible border.
@@ -69,7 +67,8 @@ const VARIANTS: Record<ButtonVariant, string> = {
   ghost: [
     "bg-transparent text-muted",
     "border border-transparent",
-    "hover:text-text hover:underline-gold",
+    // "hover:text-text hover:underline-gold",
+    "hover:text-text hover:border-b-gold/80",
   ].join(" "),
 };
 
@@ -81,8 +80,8 @@ const SIZES: Record<ButtonSize, string> = {
 // ── Component ─────────────────────────────────────────────────
 
 export function Button({
-  variant   = "primary",
-  size      = "md",
+  variant = "primary",
+  size = "md",
   iconStart,
   iconEnd,
   fullWidth = false,
@@ -99,8 +98,8 @@ export function Button({
         // ── Base ───────────────────────────────────────────
         "inline-flex items-center justify-center",
         "font-mono tracking-widest uppercase",
-        "rounded-default",           // 2px — manifesto hard cap
-        "transition-base",           // color, opacity, border @ 250ms ease-in
+        "rounded-default", // 2px — manifesto hard cap
+        "transition-base", // color, opacity, border @ 250ms ease-in
         "cursor-pointer select-none",
         // ── Focus ──────────────────────────────────────────
         "focus-visible:outline-none",
@@ -131,11 +130,6 @@ export function Button({
   );
 }
 
-
-
-
-
-
 interface LinkBtnProps {
   href: string;
   children: React.ReactNode;
@@ -150,7 +144,7 @@ export function LinkBtn({ href, children, className }: LinkBtnProps) {
       rel="noopener noreferrer"
       className={cn(
         "text-label text-muted! flex items-center gap-1.5 transition-base hover:text-text hover:underline-gold",
-        className
+        className,
       )}
     >
       {children}

@@ -7,9 +7,6 @@ import { Project } from "@/lib/types";
 import { Badge } from "./Badges";
 import { LinkBtn } from "./Button";
 
-
-
-
 export function ProjectCard({
   project,
   size = "default",
@@ -34,8 +31,8 @@ export function ProjectCard({
           "bg-elevated relative overflow-hidden shrink-0",
           "border-b border-border group-hover:border-border-em transition-base",
           isFeatured
-            ? "lg:w-80 lg:border-b-0 lg:border-e h-48 lg:h-auto"
-            : "h-36",
+            ? "lg:w-96 lg:border-b-0 lg:border-e h-52 lg:h-auto"
+            : "h-52",
         )}
         aria-hidden="true"
       >
@@ -44,7 +41,7 @@ export function ProjectCard({
             src={project.imageUrl}
             alt={project.title}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="object-cover transition-transform duration-700"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
@@ -87,7 +84,7 @@ export function ProjectCard({
           {project.title}
         </h3>
         {/* Description */}
-        <p className="text-body text-muted leading-relaxed flex-1 mb-6">
+        <p className="text-body text-muted flex-1 mb-6">
           {project.description}
         </p>
 

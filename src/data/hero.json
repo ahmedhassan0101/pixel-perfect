@@ -1,21 +1,19 @@
 {
   "content": {
-    "coordinates": "30.0444° N · 31.2357° E · v3.0",
     "role": "Full-Stack Engineer",
     "headlineOne": "I engineer systems",
     "headlineTwo": "with cinematic",
     "headlineEm": "warmth.",
     "body": "Node.js to Next.js — from schema to the pixel you see right now.",
     "ctaPrimary": "View the Work",
-    "ctaSecondary": "Let's Talk",
+    "ctaSecondary": "Download CV",
     "available": "Available for new projects"
   },
   "meta": {
     "stats": [
       { "value": "3+", "label": "Years building" },
-      { "value": "24+", "label": "Projects shipped" },
-      { "value": "480", "label": "Problems solved" },
-      { "value": "100", "label": "Lighthouse score" }
+      { "value": "7+", "label": "Projects shipped" }
+  
     ],
     "terminalLines": [
       { "cmd": "whoami", "out": "full-stack-engineer" },

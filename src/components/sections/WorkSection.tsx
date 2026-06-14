@@ -19,6 +19,7 @@ import { WorkClient } from "./WorkClient";
 import type { Project } from "../../lib/types";
 import { SectionHeader } from "../ui/SectionHeader";
 import { Section } from "../ui/Section";
+import Reveal from "../ui/Reveal";
 
 const projects = projectsData as Project[];
 
@@ -30,7 +31,6 @@ export function WorkSection() {
     <Section id="work" aria-label="Selected work">
       {/* ── Section header ─────────────────────────────────── */}
       <SectionHeader
-        index="03"
         label="Selected Artifacts"
         titleLine1="Digital products"
         titleLine2="engineered for scale."
@@ -41,7 +41,9 @@ export function WorkSection() {
         }
       />
       {/* ── Client shell — handles filter + show more ─────── */}
-      <WorkClient featured={featured} rest={rest} />
+      <Reveal activeClass="animate-fade-up animate-delay-100">
+        <WorkClient featured={featured} rest={rest} />
+      </Reveal>
     </Section>
   );
 }

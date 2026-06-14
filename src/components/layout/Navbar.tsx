@@ -1,29 +1,7 @@
-/**
- * Navbar.tsx — "use client"
- *
- * Ghost on first load — transparent, invisible background.
- * The hero breathes without a border cutting across its head.
- *
- * After 80px of scroll: bg-bg/95 materializes with border-bottom.
- * CSS transition handles the shift — no Framer Motion needed here.
- * Framer Motion is reserved for content reveals, not chrome behavior.
- *
- * Mobile: always visible with border — small screens can't afford
- * hidden navigation. The ghost behavior is desktop-only.
- *
- * Logo: three stacked lines (geometric mark) + wordmark in mono.
- * The middle line is gold — the only color in an otherwise neutral bar.
- * On hover, the lines expand their gap slightly — a quiet breath.
- *
- * Nav links: text-ghost at rest, text-muted on hover, border-bottom
- * gold on active. No background changes. Color and underline only.
- */
-
 "use client";
 
 import { useState, useEffect } from "react";
 import NextLink from "next/link";
-import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -41,8 +19,9 @@ interface NavbarProps {
 // ── Constants ─────────────────────────────────────────────────
 
 const DEFAULT_LINKS: NavLink[] = [
+  { href: "#about", label: "About" },
+  { href: "#manifesto", label: "Manifesto" },
   { href: "#work", label: "Work" },
-  { href: "#algorithms", label: "Algorithms" }, // هنا هيتغير ويبقى لقسم ال § 02 — The Manifesto
   { href: "#stack", label: "Stack" },
   { href: "#contact", label: "Contact" },
 ];
@@ -54,7 +33,7 @@ const SCROLL_THRESHOLD = 80; // px before navbar materializes
 export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const [activeHash, setActiveHash] = useState("");
 
   // ── Scroll detection ───────────────────────────────────────
   useEffect(() => {
@@ -68,10 +47,26 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // ── Hash detection ──────────────────────────────────────────
+  // This is for in-page section highlighting. It listens to hash changes
+  useEffect(() => {
+    // Set initial hash on mount
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setActiveHash(window.location.hash);
+
+    const handleHashChange = () => {
+      setActiveHash(window.location.hash);
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   // ── Close menu on navigation ───────────────────────────────
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMenuOpen(false);
-  }, [pathname]);
+  }, [activeHash]);
 
   // ── Lock body scroll when mobile menu is open ──────────────
   useEffect(() => {
@@ -105,25 +100,15 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
       >
         <div className="container-content">
           <div className="flex items-center justify-between h-16">
-            {/* ── Logo / wordmark ─────────────────────────── */}
             <NextLink
               href="/"
+              onClick={() => setActiveHash("")}
               className="group flex items-center gap-3"
               aria-label="Back to top"
             >
-              {/* Geometric mark — three lines, middle is gold */}
-              <span
-                className="flex flex-col gap-[3px] transition-all duration-300 group-hover:gap-[5px]"
-                aria-hidden="true"
-              >
-                <span className="block w-5 h-px bg-text" />
-                <span className="block w-3.5 h-px bg-gold" />
-                <span className="block w-5 h-px bg-text" />
-              </span>
-
-              {/* Wordmark */}
-              <span className="text-label text-text group-hover:text-muted transition-base">
-                Portfolio<span className="text-gold">.</span>
+              <span className="text-personal">
+                Ahmed Hassan{" "}
+                <span className="font-light! text-lg">Portfolio</span>
               </span>
             </NextLink>
 
@@ -133,17 +118,19 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
               aria-label="Primary navigation"
             >
               {links.map(({ href, label }) => {
-                const isActive = pathname === href;
+                const isActive = activeHash === href;
+
                 return (
                   <NextLink
                     key={href}
                     href={href}
+                    onClick={() => setActiveHash(href)}
                     className={cn(
-                      "text-label pb-px transition-base",
-                      "border-b",
+                      "text-muted pb-px transition-base",
+                      "border-b border-transparent ",
                       isActive
                         ? "text-text border-gold"
-                        : "text-ghost border-transparent hover:text-muted hover:border-border",
+                        : "hover:text-text! hover:border-gold",
                     )}
                   >
                     {label}
@@ -151,31 +138,6 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
                 );
               })}
             </nav>
-
-            {/* ── Desktop CTA ──────────────────────────────── */}
-            <div className="hidden md:flex items-center gap-4">
-              {/* Coordinate label — editorial detail */}
-              <span className="text-label text-ghost hidden lg:block">
-                30.0444° N
-              </span>
-              <span
-                className="w-px h-3 bg-border hidden lg:block"
-                aria-hidden="true"
-              />
-              <NextLink
-                href="#contact"
-                className="
-                  text-label text-ghost
-                  border border-border
-                  px-3 py-1.5 rounded-default
-                  transition-base
-                  hover:border-border-em hover:text-muted
-                "
-              >
-                Let&apos;s Talk
-              </NextLink>
-            </div>
-
             {/* ── Mobile menu trigger ──────────────────────── */}
             <button
               onClick={() => setMenuOpen((prev) => !prev)}
@@ -189,7 +151,7 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
                 border border-border rounded-default
                 text-muted
                 transition-base
-                hover:border-border-em hover:text-text
+                hover:border-border-em hover:text-gold
               "
             >
               {menuOpen ? (
@@ -200,24 +162,6 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
             </button>
           </div>
         </div>
-
-        {/* ── Coordinate bar — desktop only ─────────────────── */}
-        {/* Appears only when navbar is materialized            */}
-        <div
-          className={cn(
-            "hidden lg:flex items-center justify-between",
-            "container-content py-1 border-t border-border",
-            "transition-all duration-300",
-            scrolled ? "opacity-100" : "opacity-0 pointer-events-none",
-          )}
-        >
-          <span className="text-label text-ghost" style={{ fontSize: "9px" }}>
-            30.0444° N, 31.2357° E
-          </span>
-          <span className="text-label text-ghost" style={{ fontSize: "9px" }}>
-            v3.0 · {new Date().getFullYear()}
-          </span>
-        </div>
       </header>
 
       {/* ── Mobile menu overlay ───────────────────────────────── */}
@@ -227,42 +171,32 @@ export function Navbar({ links = DEFAULT_LINKS }: NavbarProps) {
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
-          className="
-            fixed inset-0 z-40
-            bg-bg
-            flex flex-col
-            md:hidden
-          "
+          className="fixed inset-0 z-40 bg-bg flex flex-col md:hidden"
         >
-          {/* Spacer matching header height */}
-          <div className="h-16 shrink-0" />
-
-          {/* Links */}
-          <nav className="flex flex-col flex-1 container-content py-8">
-            {links.map(({ href, label }) => (
-              <NextLink
-                key={href}
-                href={href}
-                onClick={handleMobileLinkClick}
-                className="
-                  flex items-center justify-between
-                  py-5 border-b border-border
-                  text-body text-muted
-                  transition-base
-                  hover:text-text hover:ps-1
-                "
-              >
-                <span>{label}</span>
-              </NextLink>
-            ))}
+          <nav className="flex flex-col flex-1 container-content justify-center items-center h-full">
+            {links.map(({ href, label }) => {
+              const isActive = activeHash === href;
+              return (
+                <NextLink
+                  key={href}
+                  href={href}
+                  onClick={() => {
+                    setActiveHash(href);
+                    handleMobileLinkClick();
+                  }}
+                  className={cn(
+                    "py-5 pb-px border-b border-border",
+                    "text-muted text-lg transition-base",
+                    isActive
+                      ? "text-text border-gold"
+                      : "hover:text-text! hover:border-gold",
+                  )}
+                >
+                  <span>{label}</span>
+                </NextLink>
+              );
+            })}
           </nav>
-
-          {/* Mobile footer */}
-          <div className="container-content py-6 border-t border-border">
-            <p className="text-label text-ghost">
-              30.0444° N, 31.2357° E · v3.0
-            </p>
-          </div>
         </div>
       )}
     </>

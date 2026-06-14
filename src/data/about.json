@@ -2,57 +2,30 @@
   "name": "Ahmed Hassan",
   "role": "Full-Stack Engineer",
   "location": "Cairo, Egypt",
-  "bio": [
-    "I write code the way architects draw plans: structure first, then detail, then surface.",
-    "My default mode is deliberate — I read documentation before I reach for a library, and I question every abstraction before I adopt it.",
-    "What I bring to a team is not just output, but judgment: knowing when to build, when to use what already exists, and when to say no."
-  ],
-  "traits": [
-    {
-      "label": "Delivery-focused",
-      "description": "I ship production-quality code on schedule. Speed and correctness are not in tension — they are both consequences of good process."
-    },
-    {
-      "label": "Environment-agnostic",
-      "description": "I have worked in fast-moving startups with shifting requirements. I calibrate to the team's pace without sacrificing code quality."
-    },
-    {
-      "label": "Compounding learner",
-      "description": "I do not chase trends. I study fundamentals deeply so that when a new tool appears, I already understand why it was built."
-    }
-  ],
+
+  "bio": "Self-taught. Six months of focused React and Next.js in production — and still going deeper. I write code the way architects draw plans: structure first, then detail, then surface.",
+
   "experience": [
     {
       "id": "exp-01",
       "company": "Smartive Media",
-      "role": "Frontend Engineer · Full-Stack",
+      "role": "Frontend Engineer",
       "period": "Apr 2024 — Sep 2024",
       "type": "Full-time",
       "contributions": [
         {
-          "label": "Architectural Translation",
-          "detail": "Translated complex Figma design systems into semantic, production-ready React and Next.js — zero deviation from the agreed spec, zero layout debt handed to QA."
+          "label": "Design to Code",
+          "detail": "Translated complex Figma systems into semantic, production-ready React and Next.js — zero layout debt handed to QA."
         },
         {
-          "label": "Validation & Integration",
-          "detail": "Engineered client-side data validation layers and integrated multi-endpoint RESTful APIs, reducing form error rates and eliminating a class of runtime failures."
+          "label": "API Integration",
+          "detail": "Engineered client-side validation layers and integrated RESTful APIs, eliminating a class of runtime failures."
         },
         {
-          "label": "Code Quality",
-          "detail": "Participated in rigorous peer code reviews and owned version control workflows on Git/GitHub, maintaining a clean commit history across a distributed team."
-        },
-        {
-          "label": "E-Commerce Systems",
-          "detail": "Designed and shipped two production e-commerce platforms end-to-end: a merchant-side management dashboard and a client-facing storefront, both built on a multi-tenant architecture."
+          "label": "E-Commerce",
+          "detail": "Shipped two production platforms end-to-end: a merchant dashboard and a client storefront on a multi-tenant architecture."
         }
       ]
-    }
-  ],
-  "education": [
-    {
-      "institution": "Your University",
-      "degree": "Bachelor of Computer Science",
-      "period": "2020 — 2024"
     }
   ]
 }
