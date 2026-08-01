@@ -41,7 +41,7 @@ export function ProjectCard({
             src={project.imageUrl}
             alt={project.title}
             fill
-            className="object-cover transition-transform duration-700"
+            className="object-cover transition-transform duration-700 img-cinematic-warm "
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">

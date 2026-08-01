@@ -374,15 +374,13 @@
     text-decoration-thickness: 1px;
   }
 
-  /* ── Image treatment — desaturate at rest ───────────────── */
-  /* Full saturation on hover — the image "comes alive"       */
-  .img-cinematic {
-    filter: grayscale(20%) contrast(1.05);
-    transition: filter var(--duration-slow) var(--ease-in);
+  /* ── Image treatment — Cinematic Warm ───────────────── */
+  .img-cinematic-warm {
+    filter: grayscale(40%) contrast(1.05) brightness(0.85) sepia(15%);
+    transition: filter 500ms cubic-bezier(0.25, 0, 0, 1);
   }
-
-  .img-cinematic:hover {
-    filter: grayscale(0%) contrast(1);
+  .img-cinematic-warm:hover {
+    filter: grayscale(0%) contrast(1) brightness(1) sepia(0%);
   }
 
   /* ============================================================

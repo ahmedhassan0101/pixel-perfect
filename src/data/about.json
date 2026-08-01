@@ -2,7 +2,6 @@
   "name": "Ahmed Hassan",
   "role": "Full-Stack Engineer",
   "location": "Cairo, Egypt",
-
   "bio": "Self-taught. Six months of focused React and Next.js in production — and still going deeper. I write code the way architects draw plans: structure first, then detail, then surface.",
 
   "experience": [
@@ -14,16 +13,16 @@
       "type": "Full-time",
       "contributions": [
         {
-          "label": "Design to Code",
-          "detail": "Translated complex Figma systems into semantic, production-ready React and Next.js — zero layout debt handed to QA."
+          "label": "Design to Production",
+          "detail": "Turned complex Figma UI components into clean, semantic React and Next.js code, maintaining precise responsiveness and visual specs across all screen sizes."
         },
         {
-          "label": "API Integration",
-          "detail": "Engineered client-side validation layers and integrated RESTful APIs, eliminating a class of runtime failures."
+          "label": "API & Form Architecture",
+          "detail": "Handled frontend state management, integrated RESTful APIs, and built robust client-side validation layers to ensure stable data flow and reduce runtime bugs."
         },
         {
-          "label": "E-Commerce",
-          "detail": "Shipped two production platforms end-to-end: a merchant dashboard and a client storefront on a multi-tenant architecture."
+          "label": "E-Commerce Deployment",
+          "detail": "Collaborated on launching two e-commerce platforms, contributing to both the multi-tenant customer storefront and the internal merchant management dashboard."
         }
       ]
     }
