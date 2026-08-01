@@ -41,6 +41,7 @@ export function ProjectCard({
             src={project.imageUrl}
             alt={project.title}
             fill
+            sizes="(max-width: 1024px) 100vw, 384px"
             className="object-cover transition-transform duration-700 img-cinematic-warm "
           />
         ) : (

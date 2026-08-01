@@ -1,9 +1,9 @@
 {
   "content": {
     "role": "Full-Stack Engineer",
-    "headlineOne": "I engineer systems",
-    "headlineTwo": "with cinematic",
-    "headlineEm": "warmth.",
+"headlineOne": "Systems built to scale",
+"headlineTwo": "interfaces built",
+"headlineEm": "to last.",
     "body": "Node.js to Next.js — from schema to the pixel you see right now.",
     "ctaPrimary": "View the Work",
     "ctaSecondary": "Download CV",
@@ -13,7 +13,6 @@
     "stats": [
       { "value": "3+", "label": "Years building" },
       { "value": "7+", "label": "Projects shipped" }
-  
     ],
     "terminalLines": [
       { "cmd": "whoami", "out": "full-stack-engineer" },
@@ -21,7 +20,12 @@
       { "cmd": "availability", "out": "open — hire me" }
     ],
     "stack": [
-      "Next.js", "Node.js", "React", "TypeScript", "MongoDB", "Tailwind"
+      "Next.js",
+      "Node.js",
+      "React",
+      "TypeScript",
+      "MongoDB",
+      "Tailwind"
     ]
   }
 }

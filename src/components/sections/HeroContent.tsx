@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, FileUser } from "lucide-react"; // استيراد أيقونة الملف للـ CV
+import { ArrowRight, FileUser } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { AvailabilityBadge } from "@/components/ui/Badges";
 import heroData from "@/data/hero.json";
@@ -77,7 +77,7 @@ export function HeroContent() {
             className="w-full sm:w-auto justify-center"
             iconEnd={<FileUser size={14} />}
             onClick={() =>
-              window.open("/resume.pdf", "_blank", "noopener,noreferrer")
+              window.open("/Ahmed_Hassan_Frontend_Developer_CV.pdf", "_blank", "noopener,noreferrer")
             }
           >
             {ctaSecondary}
@@ -100,7 +100,7 @@ export function HeroContent() {
 // "use client";
 
 // import { motion } from "framer-motion";
-// import { ArrowDown, ArrowRight, FileText } from "lucide-react"; // استيراد أيقونة الملف للـ CV
+// import { ArrowDown, ArrowRight, FileText } from "lucide-react"
 // import { Button } from "@/components/ui/Button";
 // import { AvailabilityBadge } from "@/components/ui/Badges";
 // import heroData from "@/data/hero.json";
